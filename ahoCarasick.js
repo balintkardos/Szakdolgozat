@@ -82,14 +82,17 @@ class TrieNode {
   // Példa használat:
   const ac = new AhoCorasick();
   
-  ac.addPattern("he");
-  ac.addPattern("she");
-  ac.addPattern("his");
-  ac.addPattern("hers");
+  ac.addPattern("a");
+  ac.addPattern("ag");
+  ac.addPattern("c");
+  ac.addPattern("caa");
+  ac.addPattern("gag");
+  ac.addPattern("gc");
+  ac.addPattern("gca");
   
   ac.buildFailureLinks();
   
-  const text = "hershey";
+  const text = "gcaa";
   const matches = ac.search(text);
   
   console.log(`Text: ${text}`);
@@ -99,4 +102,6 @@ class TrieNode {
   });
 
   //https://www.geeksforgeeks.org/aho-corasick-algorithm-pattern-searching/
+
+  //https://www.youtube.com/watch?v=w9-n3jW7q3s
   
