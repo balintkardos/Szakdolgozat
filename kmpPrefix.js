@@ -12,3 +12,6 @@ function prefixFunction(s) {
     }
     return p;
 }
+
+let p="ababaaba"
+console.log(prefixFunction(p))
