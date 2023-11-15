@@ -218,7 +218,10 @@ function approximateMatch(p, t, n) {
     }
   
     return Array.from(allMatches);
-  }                
+  }
+  
+  
+
 
 
 
@@ -236,8 +239,11 @@ text = "GTTATAGCTGATCGCGGCGTAGCGGCGAA";
 pattern = "GTAGCGGCG";
 console.log(string_search(pattern, text));
 
+
+
 text = "CACTTAATTTG";
 pattern = "AACTTG";
 console.log(approximateMatch(pattern, text, 1));
+
 
 //wikipédia
