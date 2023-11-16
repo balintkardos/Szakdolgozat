@@ -1,5 +1,4 @@
 //simpla naiv
-
 function naive(txt,pat){
     let M=pat.length;
     let N=txt.length;
@@ -46,8 +45,8 @@ function naiveH(txt,pat,hdistance){
   return result;
 }
 
-/*
-const text = "GCTACGATCTAGAATCTA";
-const pattern = "TCTA";
-console.log(naiveH(text,pattern,2))
-*/
+//exportálás
+module.exports = {
+  naive: naive,
+  naiveH: naiveH
+};

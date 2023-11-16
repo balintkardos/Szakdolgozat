@@ -24,32 +24,28 @@ func Index(text, pattern string) int {
     return -1
 }
 */
+
+
 function shiftOr(pattern,text){
     let state=0;
-    let mask=[]
-    let matches=[]
+    let mask=[];
+    let matches=[];
     let m=pattern.length;
-    //ha üres
     if(m==0){
         return matches
     }
-    //mask tabel
     for (let i = 0; i < m; i++) {
         mask[pattern[i]] = mask[pattern[i]] | (1 << i);
     }
-    //search
     for (let i = 0; i < text.length; i++) {
-        // Update state by shifting it and masking with the record from table
         state = (state << 1) + 1;
         state = state & mask[text[i]];
     
         if ((state & (1 << (m - 1))) !== 0) {
-            // It's a match!
             matches.push(i - pattern.length + 1);
         }
     }
     return matches; 
 }
 
-
-console.log(shiftOr("abc","almapapriabckaáabc"))
+module.exports = shiftOr;
