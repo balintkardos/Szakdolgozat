@@ -1,6 +1,8 @@
 // Import functions from naive.js and shiftAnd.js
 const naiv = require('./naiv');
 const shiftOr = require('./shiftAnd');
+const notSoNaive = require('./notSoNaive');
+const KR = require('./rubinKarp');
 
 function measureMemoryUsage() {
     const used = process.memoryUsage();
@@ -11,12 +13,16 @@ function measureMemoryUsage() {
 
 
 // Use the functions
-measureMemoryUsage();
+
 console.time("naive");
 console.log(naiv.naive("almapapriabckaáabc","abc"));
 console.timeEnd("naive");
-measureMemoryUsage();
 console.time("shiftOr");
 console.log(shiftOr("abc", "almapapriabckaáabc"));
 console.timeEnd("shiftOr");
-measureMemoryUsage();
+console.time("notSoNaive");
+console.log(notSoNaive("abc", "almapapriabckaáabc"));
+console.timeEnd("notSoNaive");
+console.time("RK");
+console.log(KR("abc", "almapapriabckaáabc"));
+console.timeEnd("RK");
