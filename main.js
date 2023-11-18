@@ -3,12 +3,14 @@ const naiv = require('./naiv');
 const shiftOr = require('./shiftAnd');
 const notSoNaive = require('./notSoNaive');
 const KR = require('./rubinKarp');
-const SuffixTree = require('./suffixTree');
+//const SuffixTree = require('./suffixTree');
+const SuffixTree = require('./suffix-tree');
 
 function measureMemoryUsage() {
     const used = process.memoryUsage();
     console.log(`Memory Usage: ${JSON.stringify(used)}`);
 }
+/*
 function isStringInTree(tree, P) {
     let currentNode = tree.head;
   
@@ -34,8 +36,14 @@ function isStringInTree(tree, P) {
     // If the loop completes, the entire string is present in the tree
     return true;
   }
-
-
+  const suffixTree = new SuffixTree();
+  suffixTree.add("aaaabbb");
+  const longestSubstring = suffixTree.getLongestSubstring();
+  console.log("Longest Substring:", longestSubstring);
+  const searchString = "aab";
+const isStringPresent = isStringInTree(suffixTree, searchString);
+console.log(`String "${searchString}" is${isStringPresent ? '' : ' not'} in the tree.`);
+*/
 
 
 // Use the functions
@@ -53,14 +61,25 @@ console.time("RK");
 console.log(KR("abc", "almapapriabckaáabc"));
 console.timeEnd("RK");
 
+// Create an instance of SuffixTree
 const suffixTree = new SuffixTree();
-suffixTree.add("aaaabbb");
-const longestSubstring = suffixTree.getLongestSubstring();
-console.log("Longest Substring:", longestSubstring);
+
+// Add the document to the suffix tree
+const text = "almapapriabckaáabc";
+const document = "doc1";
+
+for (let i = text.length; i >= 0; i--) {
+    suffixTree.add(text.substring(i), document);
+}
+
+// Find occurrences of the pattern "abc"
+const pattern = "pap";
+const result = suffixTree.getPattern(pattern);
+
+console.log(result);
 
 
 
 
-const searchString = "aab";
-const isStringPresent = isStringInTree(suffixTree, searchString);
-console.log(`String "${searchString}" is${isStringPresent ? '' : ' not'} in the tree.`);
+
+
