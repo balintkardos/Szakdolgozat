@@ -4,7 +4,7 @@ const shiftOr = require('./shiftAnd');
 const notSoNaive = require('./notSoNaive');
 const KR = require('./rubinKarp');
 //const SuffixTree = require('./suffixTree');
-const SuffixTree = require('./suffix-tree');
+//const SuffixTree = require('./suffix_Tree');
 
 function measureMemoryUsage() {
     const used = process.memoryUsage();
@@ -61,22 +61,12 @@ console.time("RK");
 console.log(KR("abc", "almapapriabckaáabc"));
 console.timeEnd("RK");
 
-// Create an instance of SuffixTree
-const suffixTree = new SuffixTree();
 
-// Add the document to the suffix tree
-const text = "almapapriabckaáabc";
-const document = "doc1";
+const { Node, SuffixTree } = require('./suffix_Tree');
 
-for (let i = text.length; i >= 0; i--) {
-    suffixTree.add(text.substring(i), document);
-}
-
-// Find occurrences of the pattern "abc"
-const pattern = "pap";
-const result = suffixTree.getPattern(pattern);
-
-console.log(result);
+const sTree = new SuffixTree("poloyolo");
+//const indexes = sTree.indexesOf("gf");
+//console.log(indexes);
 
 
 
