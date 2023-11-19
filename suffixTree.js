@@ -198,6 +198,8 @@ SuffixTree.prototype.print = function(){
   console.log(this.toString());
 }
 
+//sima keresés
+
 SuffixTree.prototype.search = function(pattern) {
   var currentNode = this.root;
   var i = 0; // Index for the pattern
@@ -232,12 +234,16 @@ SuffixTree.prototype.search = function(pattern) {
   return true;
 };
 
+
+
+
+
 // Example usage:
 var suffixTree = new SuffixTree();
 suffixTree.addString("abaaba");
 
 //var pattern1 = "almapapriabckaáabc";
-var pattern2 = "aa";
+var pattern2 = "baab";
 
 suffixTree.print();
 
