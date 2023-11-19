@@ -243,7 +243,7 @@ var suffixTree = new SuffixTree();
 suffixTree.addString("abaaba");
 
 //var pattern1 = "almapapriabckaáabc";
-var pattern2 = "abaabc";
+var pattern2 = "a";
 
 suffixTree.print();
 
@@ -252,7 +252,11 @@ console.time("suffixtree");
 console.log(suffixTree.search(pattern2)); // Output: false
 console.timeEnd("suffixtree");
 
-var treeJson = suffixTree.convertToJson();
-console.log(JSON.stringify(treeJson, null, 2));
+console.time("belso");
+console.log("abaaba".indexOf("a")); // Output: false
+console.timeEnd("belso");
+
+//var treeJson = suffixTree.convertToJson();
+//console.log(JSON.stringify(treeJson, null, 2));
 
 
