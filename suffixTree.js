@@ -243,7 +243,7 @@ var suffixTree = new SuffixTree();
 suffixTree.addString("abaaba");
 
 //var pattern1 = "almapapriabckaáabc";
-var pattern2 = "baab";
+var pattern2 = "abaabc";
 
 suffixTree.print();
 
