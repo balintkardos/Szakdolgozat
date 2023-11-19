@@ -234,14 +234,19 @@ SuffixTree.prototype.search = function(pattern) {
 
 // Example usage:
 var suffixTree = new SuffixTree();
-suffixTree.addString("almapapriabckaáabc");
+suffixTree.addString("abaaba");
 
 //var pattern1 = "almapapriabckaáabc";
-var pattern2 = "abc";
+var pattern2 = "aa";
+
+suffixTree.print();
 
 //console.log(suffixTree.search(pattern1)); // Output: true
 console.time("suffixtree");
 console.log(suffixTree.search(pattern2)); // Output: false
 console.timeEnd("suffixtree");
+
+var treeJson = suffixTree.convertToJson();
+console.log(JSON.stringify(treeJson, null, 2));
 
 
