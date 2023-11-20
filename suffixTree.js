@@ -1,4 +1,3 @@
-'use strict';
 
 function Node(){
     this.transition = {};
@@ -156,7 +155,7 @@ suffixTree.addString("aaabbb");
 console.timeEnd("generate");
 
 //var pattern1 = "almapapriabckaáabc";
-var pattern2 = "ab";
+var pattern2 = "aaba";
 
 //console.log(suffixTree.search(pattern1)); 
 console.time("search");
