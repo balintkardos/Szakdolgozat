@@ -13,7 +13,6 @@ Node.prototype.isLeaf = function() {
     return Object.keys(this.transition).length === 0;
 }
 
-
 function SuffixTree (){  
     this.text = '';
     this.str_list = [];
@@ -54,7 +53,6 @@ SuffixTree.prototype.addString = function(str) {
   return this;
 }
 
-
 SuffixTree.prototype.update = function(s, k, i) {
 
   var oldr = this.root;
@@ -83,7 +81,6 @@ SuffixTree.prototype.update = function(s, k, i) {
   return [s, k];
 }
 
-
 SuffixTree.prototype.testAndSplit = function(s, k, p, t) {
   if(k <= p) {
     var traNs = s.transition[this.text[k]];
@@ -104,7 +101,6 @@ SuffixTree.prototype.testAndSplit = function(s, k, p, t) {
   }
 }
 
-
 SuffixTree.prototype.canonize = function(s, k, p) {
   if(p < k)
     return [s, k];
@@ -124,78 +120,6 @@ SuffixTree.prototype.canonize = function(s, k, p) {
 
     return [s, k];
   }
-}
-
-
-SuffixTree.prototype.convertToJson = function(){
-  // convert tree to json to use with d3js
- 
-  var text = this.text;
-  var ret = {
-      "name" : "",
-      "parent": "null",
-      "suffix" : "",
-      "children": []
-  }
-
-  function traverse(node, seps, str_list, ret) {
-    for(var t in node.transition) {
-      var traNs = node.transition[t];
-      var s = traNs[0], a = traNs[1], b = traNs[2]; 
-      var name =  text.substring(a, b + 1);
-      var position = seps.length-1;
-      for(var pos=name.length -1; pos>-1; pos--){
-         var insep = seps.indexOf(name[pos]);
-         position = insep>-1 ?insep:position;
-      }
-
-      var names = name.split(seps[position]);
-      if (names.length >1){
-          name = names[0] + seps[position];
-      }
-      var suffix =  ret["suffix"]+name;
-      var cchild = {
-        "name" : name,
-        "parent": ret['name'],
-        "suffix" : suffix,
-        "children": []
-      };
-      if (s.isLeaf()){
-        cchild['seq'] = position +1;
-        cchild['start'] = ""+(str_list[position].length - suffix.length);
-      }
-      cchild = traverse(s, seps, str_list, cchild);
-      ret["children"].push(cchild)
-    }
-
-    return ret;
-
-  }
-  console.log(this.seps);
-  return traverse(this.root, this.seps, this.str_list, ret);
-
-}
-
-SuffixTree.prototype.toString = function() {
-  var text = this.text;
-
-  function traverse(node, offset, ret) {
-    offset = typeof offset !== 'undefined' ? offset : '';
-    ret = typeof ret !== 'undefined' ? ret : '';
-    for(var t in node.transition) {
-      var traNs = node.transition[t];
-      var s = traNs[0], a = traNs[1], b = traNs[2]; 
-      ret += offset + '["' + text.substring(a, b + 1) + '", ' + a + ', ' + b + ']' + '\r\n';
-      ret += traverse(s, offset+'\t');
-    }
-    return ret;
-  }
-  var res = traverse(this.root)
-  return res;
-}
-
-SuffixTree.prototype.print = function(){
-  console.log(this.toString());
 }
 
 SuffixTree.prototype.search = function(pattern) {
@@ -223,28 +147,21 @@ SuffixTree.prototype.search = function(pattern) {
     }
   }
   return true;
-};
-
-
-
-
-
+}
 
 // Example usage:
+console.time("generate");
 var suffixTree = new SuffixTree();
-suffixTree.addString("abaaba");
+suffixTree.addString("aaabbb");
+console.timeEnd("generate");
 
 //var pattern1 = "almapapriabckaáabc";
-var pattern2 = "baaba";
+var pattern2 = "ab";
 
-suffixTree.print();
-
-//console.log(suffixTree.search(pattern1)); // Output: true
-console.time("suffixtree");
-console.log(suffixTree.search(pattern2)); // Output: false
-console.timeEnd("suffixtree");
-
-var treeJson = suffixTree.convertToJson();
-console.log(JSON.stringify(treeJson, null, 2));
+//console.log(suffixTree.search(pattern1)); 
+console.time("search");
+let output=suffixTree.search(pattern2); 
+console.timeEnd("search");
+console.log(output);
 
 
