@@ -198,41 +198,33 @@ SuffixTree.prototype.print = function(){
   console.log(this.toString());
 }
 
-//sima keresés
-
 SuffixTree.prototype.search = function(pattern) {
   var currentNode = this.root;
-  var i = 0; // Index for the pattern
+  var i = 0;
 
   while (i < pattern.length) {
     var transition = currentNode.transition[pattern[i]];
 
     if (!transition) {
-      // No matching edge, pattern is not in the tree
       return false;
     }
 
     var start = transition[1];
     var end = transition[2];
 
-    // Check characters along the edge
     for (var j = start; j <= end && i < pattern.length; j++) {
       if (this.text[j] !== pattern[i]) {
-        // Characters don't match, pattern is not in the tree
         return false;
       }
       i++;
     }
-
-    // If we reached the end of the edge, move to the next node
     if (i === pattern.length) {
       currentNode = transition[0];
     }
   }
-
-  // If we reached here, the entire pattern is found in the tree
   return true;
 };
+
 
 
 
@@ -243,7 +235,7 @@ var suffixTree = new SuffixTree();
 suffixTree.addString("abaaba");
 
 //var pattern1 = "almapapriabckaáabc";
-var pattern2 = "a";
+var pattern2 = "baaba";
 
 suffixTree.print();
 
@@ -252,11 +244,7 @@ console.time("suffixtree");
 console.log(suffixTree.search(pattern2)); // Output: false
 console.timeEnd("suffixtree");
 
-console.time("belso");
-console.log("abaaba".indexOf("a")); // Output: false
-console.timeEnd("belso");
-
-//var treeJson = suffixTree.convertToJson();
-//console.log(JSON.stringify(treeJson, null, 2));
+var treeJson = suffixTree.convertToJson();
+console.log(JSON.stringify(treeJson, null, 2));
 
 
