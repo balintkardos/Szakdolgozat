@@ -28,6 +28,8 @@ def queryIndex(p,t,index):
     return offsets
 */
 
+//bit search
+
 class Index {
     constructor(t, k) {
       this.k = k;
