@@ -78,7 +78,7 @@ function afterRead(){
     console.time("Naive");
     serach(fileData,P,naiv.naive)
     console.timeEnd("Naive");
-
+    
 
     /*
     console.time("shiftOr");
