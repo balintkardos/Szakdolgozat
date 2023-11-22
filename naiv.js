@@ -1,5 +1,5 @@
 //simpla naiv
-function naive(txt,pat){
+function naive(pat,txt){
     let M=pat.length;
     let N=txt.length;
     const result = [];

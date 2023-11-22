@@ -105,7 +105,7 @@ function full_shift_table(S) {
     return F;
 }
 
-function string_search(P, T) {
+function boyerMoore(P, T) {
     if (P.length === 0 || T.length === 0 || T.length < P.length) {
         return [];
     }
@@ -157,7 +157,7 @@ def approximate_match(p,t,n):
     for i in Range(n+1):
         start = i*segment_length
         end = min((i+1)*segment_length,len(p))
-        matches = string_search(p[start:end],t)
+        matches = boyerMoore(p[start:end],t)
 
         mismatches = 0
         for m in matches:
@@ -187,7 +187,7 @@ function approximateMatch(p, t, n) {
       const end = Math.min((i + 1) * segmentLength, p.length);
       const segment = p.substring(start, end);
   
-      const matches = string_search(segment, t);
+      const matches = boyerMoore(segment, t);
       
       let mismatches = 0;
       for (const m of matches) {
@@ -219,31 +219,5 @@ function approximateMatch(p, t, n) {
   
     return Array.from(allMatches);
   }
-  
-  
 
-
-
-
-
-
-
-// Example usage:
-let text = "This is a test string for Boyer-Moore search.";
-let pattern = "Boyer-Moore";
-console.log(string_search(pattern, text));
-
-console.log('masodik')
-// Example usage
-text = "GTTATAGCTGATCGCGGCGTAGCGGCGAA";
-pattern = "GTAGCGGCG";
-console.log(string_search(pattern, text));
-
-
-
-text = "CACTTAATTTG";
-pattern = "AACTTG";
-console.log(approximateMatch(pattern, text, 1));
-
-
-//wikipédia
+module.exports = boyerMoore;
