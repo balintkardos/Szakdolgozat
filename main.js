@@ -66,6 +66,13 @@ readStream.on('error', (err) => {
 function afterRead(){
 
     let P="ATATATATATAT";
+
+    //console.log(fileData[0].slice(0,10500));
+
+    console.log(countCharactersInArray(fileData));
+
+    return 0;
+    
     console.time("BM");
     serach(fileData,P,boyerMoore)
     console.timeEnd("BM");
@@ -101,6 +108,32 @@ function serach(fileData,P,searchAlgorithm){
     }
     console.log(all)
 }
+
+function countCharactersInArray(arr) {
+    // Create an empty dictionary to store character counts
+    let charCount = {};
+  
+    // Iterate through each string in the array
+    arr.forEach((str) => {
+      // Iterate through each character in the string
+      for (let i = 0; i < str.length; i++) {
+        // Get the current character
+        let char = str[i];
+  
+        // Check if the character is already in the dictionary
+        if (charCount[char]) {
+          // Increment the count if the character is already in the dictionary
+          charCount[char]++;
+        } else {
+          // Add the character to the dictionary with a count of 1 if it's not already present
+          charCount[char] = 1;
+        }
+      }
+    });
+  
+    // Return the dictionary with character counts
+    return charCount;
+  }
 
 
 
