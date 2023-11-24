@@ -12,8 +12,6 @@ function measureMemoryUsage() {
 
 //const fs = require('fs');
 //const fileContent = fs.readFileSync('D:\\Balint\\szakdolgozat\\genomic.fna', 'utf8');
-const fs = require('fs');
-let fileData = ['','','','','','','','',''];
 /*
 let fileData2 = '';
 let fileData3 = '';
@@ -22,6 +20,9 @@ let fileData5 = '';
 let fileData6 = '';
 let fileData7 = '';
 */
+const fs = require('fs');
+let fileData = ['','','','','','','','',''];
+
 
 const filePath = 'D:\\Balint\\szakdolgozat\\genomic.fna';
 const chunkSize = 1024 * 1024; 

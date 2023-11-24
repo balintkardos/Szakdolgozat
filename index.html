@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload Example</title>
+</head>
+<body>
+
+    <h1>File Upload Example</h1>
+
+    <input type="file" id="file" />
+<button id="get-time">Get Time</button>
+<script>
+    document.getElementById('get-time').onclick = function () {
+        let fileInput = document.getElementById('file');
+        let file = fileInput.files[0];
+
+        if (!file) {
+            console.error("No file selected");
+            return;
+        }
+
+        let fr = new FileReader();
+        let CHUNK_SIZE = 500 * 1024 * 1024; // 500 MB
+        let chunks = [];
+        let chunkIndex = 0;
+
+        fr.onload = function () {
+            // Convert the ArrayBuffer to a string
+            let chunkString = new TextDecoder().decode(fr.result);
+
+            // Store the chunk string in the array
+            chunks.push(chunkString);
+
+            // Move to the next chunk
+            chunkIndex++;
+
+            // If there are more chunks, continue reading
+            if (chunkIndex * CHUNK_SIZE < file.size) {
+                seek();
+            } else {
+                // All chunks have been read
+                console.log("All chunks read:", chunks[6] );
+            }
+        };
+
+        seek();
+
+        function seek() {
+            let start = chunkIndex * CHUNK_SIZE;
+            let end = Math.min(start + CHUNK_SIZE, file.size);
+            let slice = file.slice(start, end);
+            fr.readAsArrayBuffer(slice);
+        }
+    };
+
+    function naive(pat,txt){
+    let M=pat.length;
+    let N=txt.length;
+    const result = [];
+
+    for (let i=0; i<=(N-M);i++){
+      let j;
+      for (j=0; j <M;j++){
+        if(txt[i+j]!=pat[j]){
+          break;
+        }
+      }
+      if(j==M){
+         result.push(i);
+      }
+    }
+     
+    return result;
+}
+</script>
+
+</body>
+</html>
