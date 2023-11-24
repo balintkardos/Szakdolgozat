@@ -1,4 +1,4 @@
-function prefixFunction(s) {
+function kmpPrefix(s) {
     let p = [0];
     let j = 0;
     for (let i = 1; i < s.length; i++) {
@@ -13,5 +13,5 @@ function prefixFunction(s) {
     return p;
 }
 
-let p="ababaaba"
-console.log(prefixFunction(p))
+
+module.exports = kmpPrefix;

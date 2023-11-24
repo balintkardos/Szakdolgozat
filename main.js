@@ -1,29 +1,15 @@
-// Import functions from naive.js and shiftAnd.js
+// Import 
 const naiv = require('./naiv');
 const shiftOr = require('./shiftAnd');
 const notSoNaive = require('./notSoNaive');
 const KR = require('./rubinKarp');
-const boyerMoore = require('./boyerMoore')
+const boyerMoore = require('./boyerMoore');
+const kmp= require('./kmp');
+const kmpPrefix = require('./kmpPrefix');
 
-function measureMemoryUsage() {
-    const used = process.memoryUsage();
-    console.log(`Memory Usage: ${JSON.stringify(used)}`);
-}
 
-//const fs = require('fs');
-//const fileContent = fs.readFileSync('D:\\Balint\\szakdolgozat\\genomic.fna', 'utf8');
-/*
-let fileData2 = '';
-let fileData3 = '';
-let fileData4 = '';
-let fileData5 = '';
-let fileData6 = '';
-let fileData7 = '';
-*/
 const fs = require('fs');
-let fileData = ['','','','','','','','',''];
-
-
+let fileData = [];
 const filePath = 'D:\\Balint\\szakdolgozat\\genomic.fna';
 const chunkSize = 1024 * 1024; 
 
@@ -61,8 +47,6 @@ readStream.on('error', (err) => {
     console.error(`Error reading the file: ${err}`);
 });
 
-
-
 // Use the functions
 function afterRead(){
 
@@ -70,10 +54,13 @@ function afterRead(){
 
     //console.log(fileData[0].slice(0,10500));
 
-    console.log(countCharactersInArray(fileData));
+    //console.log(countCharactersInArray(fileData));
+    
 
     return 0;
-    
+    console.time("kmp");
+    serach(fileData,P,kmp)
+    console.timeEnd("kmp");
     console.time("BM");
     serach(fileData,P,boyerMoore)
     console.timeEnd("BM");
@@ -86,13 +73,9 @@ function afterRead(){
     console.time("Naive");
     serach(fileData,P,naiv.naive)
     console.timeEnd("Naive");
-    
-
-    /*
     console.time("shiftOr");
-    console.log(shiftOr(P, fileData));
+    serach(fileData,P ,shiftOr);
     console.timeEnd("shiftOr");
-    */
 }
 
 

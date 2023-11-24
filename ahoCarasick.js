@@ -83,6 +83,7 @@ class TrieNode {
   const ac = new AhoCorasick();
   
   ac.addPattern("a");
+  
   ac.addPattern("ag");
   ac.addPattern("c");
   ac.addPattern("caa");
@@ -90,9 +91,10 @@ class TrieNode {
   ac.addPattern("gc");
   ac.addPattern("gca");
   
+  
   ac.buildFailureLinks();
   
-  const text = "gcaa";
+  const text = "gcavhgvfkghasdvfugvbsdhkgfvsdakhvbfkuzsvafhgsadvfhgvasdhgfvasdhkgvfiztuwGVFHJGVBFKHGADSIZKFGIESHJBFKJHSADBFKGHJSDAZUTFGVSAJKHBFKHJSADVFUAGSUDZFHGAJSHa";
   const matches = ac.search(text);
   
   console.log(`Text: ${text}`);
