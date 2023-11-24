@@ -6,6 +6,7 @@ const KR = require('./rubinKarp');
 const boyerMoore = require('./boyerMoore');
 const kmp= require('./kmp');
 const kmpPrefix = require('./kmpPrefix');
+const SuffixTree = require('./suffixTree');
 
 
 const fs = require('fs');
@@ -55,6 +56,16 @@ function afterRead(){
     //console.log(fileData[0].slice(0,10500));
 
     //console.log(countCharactersInArray(fileData));
+
+    //const inputString = fileData[0];
+
+    var suffixTree = new SuffixTree();
+    console.log(fileData[0].length/50)
+    suffixTree.addString(fileData[0].slice(0,fileData[0].length/50));
+    console.log("kész a fa");
+    console.time("suffixFaKeresés");
+    console.log(suffixTree.search("ATATATATATAT"))
+    console.timeEnd("suffixFaKeresés");
     
 
     return 0;

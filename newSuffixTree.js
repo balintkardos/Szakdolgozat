@@ -256,8 +256,21 @@ class SuffixTree {
   }
 }
 
-const inputString = "banana";
-const suffixTree = new SuffixTree(inputString);
+module.exports = SuffixTree;
+
+
+
+/*
+// Example usage:
+console.time("generate");
+const suffixTree = new SuffixTree("banana");
+console.timeEnd("generate");
+
 const patternToSearch = "nana";
+
+//console.log(suffixTree.search(pattern1)); 
+console.time("search");
 const isPatternFound = suffixTree.searchPattern(patternToSearch);
+console.timeEnd("search");
 console.log(`Pattern "${patternToSearch}" found: ${isPatternFound}`);
+*/

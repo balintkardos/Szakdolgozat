@@ -148,6 +148,10 @@ SuffixTree.prototype.search = function(pattern) {
   return true;
 }
 
+module.exports = SuffixTree;
+
+
+/*
 // Example usage:
 console.time("generate");
 var suffixTree = new SuffixTree();
@@ -162,5 +166,6 @@ console.time("search");
 let output=suffixTree.search(pattern2); 
 console.timeEnd("search");
 console.log(output);
+*/
 
 
