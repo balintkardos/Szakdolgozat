@@ -84,9 +84,14 @@ class Index {
     return offsets;
   }
 
+  module.exports = {
+    Index: Index,
+    queryIndex: queryIndex
+  };
   
+  /*
   // Example usage:
-  const myIndex = new Index("ACGTACGTACGT", 4);
+  const myIndex = new Index("ACGTACGTACGT", 0);
   const result = myIndex.query("CGTA");
   //console.log(result);  // Output: [1, 5]
   
@@ -101,4 +106,4 @@ class Index {
   const positions = queryIndex(pattern, text, index);
   
   console.log("Pattern positions:", positions);
-  
+  */

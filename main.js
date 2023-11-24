@@ -1,5 +1,6 @@
 // Import 
 const naiv = require('./naiv');
+const query = require('./queryIndex');
 const shiftOr = require('./shiftAnd');
 const notSoNaive = require('./notSoNaive');
 const KR = require('./rubinKarp');
@@ -59,6 +60,18 @@ function afterRead(){
 
     //const inputString = fileData[0];
 
+    console.time("query");
+    const myIndex = new query.Index(fileData[0].slice(0,fileData[0].length/50), 0);
+    console.timeEnd("query");
+    console.time("querySearch");
+    const result = myIndex.query(P);
+    console.timeEnd("querySearch");
+    console.log(result);
+
+
+
+
+    return 0;
     var suffixTree = new SuffixTree();
     console.log(fileData[0].length/50)
     suffixTree.addString(fileData[0].slice(0,fileData[0].length/50));
@@ -67,8 +80,6 @@ function afterRead(){
     console.log(suffixTree.search("ATATATATATAT"))
     console.timeEnd("suffixFaKeresés");
     
-
-    return 0;
     console.time("kmp");
     serach(fileData,P,kmp)
     console.timeEnd("kmp");
