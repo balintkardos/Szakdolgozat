@@ -4,15 +4,23 @@ import React, { useState } from 'react';
 const naiv = require('./alg/naiv');
 
 function App() {
-  const [selectedAlgorithm, setSelectedAlgorithm] = useState("naive");
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState(0);
   const [description, setDescription] = useState("Ez a naive algoritmus");
   const [textInput, setTextInput] = useState('');
   const [patternInput, setPatternInput] = useState('');
+  const [timer, setTimer] = useState(null);
+  const [output, setOutput] = useState([]);
+
   const handleSearchClick = () => {
     console.log('Text input:', textInput);
     console.log('Pattern input:', patternInput);
     if(selectedAlgorithm===0){
-      console.log(naiv.naive(patternInput,textInput))
+      const startTime = performance.now();
+      setOutput(naiv.naive(patternInput,textInput));
+      const endTime = performance.now();
+      console.log(startTime,endTime)
+      setTimer((endTime - startTime));
+
     }
   };
 
@@ -104,7 +112,15 @@ function App() {
         />
         <button className="input-button" onClick={handleSearchClick}>Search</button>
       </div>
-      <OutputArea />
+      <div>
+        {output.map((element,index)=>(
+          <OutputArea 
+            element={element}
+            index={index}
+          />
+        ))}
+      </div>
+      <p>{timer}</p>
     </div>
   );
 }
