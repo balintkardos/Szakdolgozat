@@ -1,6 +1,7 @@
 
 import OutputArea from './OutputArea';
 import React, { useState } from 'react';
+const naiv = require('./alg/naiv');
 
 function App() {
   const [selectedAlgorithm, setSelectedAlgorithm] = useState("naive");
@@ -10,6 +11,9 @@ function App() {
   const handleSearchClick = () => {
     console.log('Text input:', textInput);
     console.log('Pattern input:', patternInput);
+    if(selectedAlgorithm===0){
+      console.log(naiv.naive(patternInput,textInput))
+    }
   };
 
   React.useEffect(() => {
