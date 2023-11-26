@@ -1,0 +1,23 @@
+body {
+    margin: 0;
+    background-color: #282b30;
+    padding: 20px;
+    font-family: 'Karla', sans-serif;
+    color: white;
+}
+
+.algorithm-button {
+    color: #fff;
+    min-height: 32px;
+    min-width: 60px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Karla', sans-serif;
+    line-height: 16px;
+    margin: 4px 8px 4px 0;
+    padding: 2px 16px;
+    border: 0;
+    border-radius: 3px;
+    box-sizing: border-box;
+    cursor: pointer;
+}

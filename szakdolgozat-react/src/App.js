@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 const naiv = require('./alg/naiv');
 
 function App() {
-  const [selectedAlgorithm, setSelectedAlgorithm] = useState(0);
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState(-1);
   const [description, setDescription] = useState("Ez a naive algoritmus");
   const [textInput, setTextInput] = useState('');
   const [patternInput, setPatternInput] = useState('');
@@ -53,43 +53,53 @@ function App() {
     <div className="App">
       <div className="algorithm">
         <button className="algorithm-button"
+          style={{backgroundColor: (selectedAlgorithm===0) ? "#42b983" : "#555a64"}}
           onClick={() => {
             setSelectedAlgorithm(0);
           }}
           >Naive</button>
-        <button className="algorithm-button" 
+        <button className="algorithm-button"
+        style={{backgroundColor: (selectedAlgorithm===1) ? "#42b983" : "#555a64"}}
         onClick={() => {
           setSelectedAlgorithm(1);
           }}>Not So Naiv</button>
-        <button className="algorithm-button"  
+        <button className="algorithm-button"
+        style={{backgroundColor: (selectedAlgorithm===2) ? "#42b983" : "#555a64"}}  
         onClick={() => {
           setSelectedAlgorithm(2);
           }}>Boyer-Moore</button>
-        <button className="algorithm-button"  
+        <button className="algorithm-button"
+        style={{backgroundColor: (selectedAlgorithm===3) ? "#42b983" : "#555a64"}} 
         onClick={() => {
           setSelectedAlgorithm(3);
           }}>Quik Search</button>
-        <button className="algorithm-button"   
+        <button className="algorithm-button"
+        style={{backgroundColor: (selectedAlgorithm===4) ? "#42b983" : "#555a64"}}   
         onClick={() => {
           setSelectedAlgorithm(4);
           }}>Knut-Morris-Pratt</button>
-        <button className="algorithm-button"   
+        <button className="algorithm-button"
+        style={{backgroundColor: (selectedAlgorithm===5) ? "#42b983" : "#555a64"}}   
         onClick={() => {
           setSelectedAlgorithm(5);
           }}>Apostolico-Giancarlo</button>
-        <button className="algorithm-button"   
+        <button className="algorithm-button"
+        style={{backgroundColor: (selectedAlgorithm===6) ? "#42b983" : "#555a64"}}   
         onClick={() => {
           setSelectedAlgorithm(6);
           }}>Aho-Corasick</button>
-        <button className="algorithm-button"   
+        <button className="algorithm-button"
+        style={{backgroundColor: (selectedAlgorithm===7) ? "#42b983" : "#555a64"}}   
         onClick={() => {
           setSelectedAlgorithm(7);
           }}>Shift-or</button>
-        <button className="algorithm-button"   
+        <button className="algorithm-button"
+        style={{backgroundColor: (selectedAlgorithm===8) ? "#42b983" : "#555a64"}}   
         onClick={() => {
           setSelectedAlgorithm(8);
           }}>Karp and Rabin</button>
-        <button className="algorithm-button"   
+        <button className="algorithm-button"
+        style={{backgroundColor: (selectedAlgorithm===9) ? "#42b983" : "#555a64"}}   
         onClick={() => {
           setSelectedAlgorithm(9);
           }}>Suffix fa</button>
