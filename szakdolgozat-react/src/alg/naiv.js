@@ -21,7 +21,7 @@ function naive(pat,txt){
 
 //hibával is müködik
 
-function naiveH(txt,pat,hdistance){
+function naiveH(pat,txt,hdistance){
   let M=pat.length;
   let N=txt.length;
   const result = [];

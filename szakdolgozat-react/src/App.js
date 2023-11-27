@@ -8,20 +8,38 @@ function App() {
   const [description, setDescription] = useState("Ez a naive algoritmus");
   const [textInput, setTextInput] = useState('');
   const [patternInput, setPatternInput] = useState('');
+  const [hibaInput, setHibaInput] = useState('');
   const [timer, setTimer] = useState(null);
   const [output, setOutput] = useState([]);
 
   const handleSearchClick = () => {
-    console.log('Text input:', textInput);
-    console.log('Pattern input:', patternInput);
+    if(textInput === ''){
+      alert('Szöveg mező nem lehet üres!');
+      return 0;
+    }
+    if(patternInput === ''){
+      alert('Minta mező nem lehet üres!');
+      return 0;
+    }
     if(selectedAlgorithm===0){
       const startTime = performance.now();
       setOutput(naiv.naive(patternInput,textInput));
       const endTime = performance.now();
-      console.log(startTime,endTime)
       setTimer((endTime - startTime));
 
-    }
+    } else if(selectedAlgorithm===10){
+      if(patternInput === ''){
+        alert('Hiba mező nem lehet üres!');
+        return 0;
+      }
+      const startTime = performance.now();
+      let out=naiv.naiveH(patternInput,textInput,hibaInput);
+      setOutput(out);
+      const endTime = performance.now();
+      console.log(out);
+      setTimer((endTime - startTime));
+    } 
+
   };
 
   React.useEffect(() => {
@@ -45,6 +63,8 @@ function App() {
       setDescription("Ez a Karp and Rabin algoritmus");
     } else if(selectedAlgorithm===9){
       setDescription("Ez a Suffix fa");
+    } else if(selectedAlgorithm===10){
+      setDescription("Ez a Naiv Hibával");
     }  
   }, [selectedAlgorithm]);
 
@@ -58,6 +78,12 @@ function App() {
             setSelectedAlgorithm(0);
           }}
           >Naive</button>
+          <button className="algorithm-button"
+          style={{backgroundColor: (selectedAlgorithm===10) ? "#42b983" : "#555a64"}}
+          onClick={() => {
+            setSelectedAlgorithm(10);
+          }}
+          >Naive H</button>
         <button className="algorithm-button"
         style={{backgroundColor: (selectedAlgorithm===1) ? "#42b983" : "#555a64"}}
         onClick={() => {
@@ -108,30 +134,44 @@ function App() {
         <div>Leírás: {description}</div>
       </div>
       <div className="inputField">
-        <p>Text input:</p>
+        <p>Text:</p>
         <input
           type="text"
           value={textInput}
           onChange={(e) => setTextInput(e.target.value)}
         />
-        <p>Pattern input:</p>
+        <p>Pattern:</p>
         <input
           type="text"
           value={patternInput}
           onChange={(e) => setPatternInput(e.target.value)}
         />
+        {selectedAlgorithm === 10 ? (
+          <div>
+            <p>Hiba:</p>
+            <input
+              type="number"
+              min="0"
+              value={hibaInput}
+              onChange={(e) => setHibaInput(e.target.value)}
+            />
+          </div>
+        ) : null}
         <button className="input-button" onClick={handleSearchClick}>Search</button>
       </div>
       <div>
-        {output.map((element,index)=>(
+      {output.length > 0 ? (
+        output.map((element, index) => (
           <OutputArea 
-            element={element}
-            index={index}
-          />
-        ))}
-      </div>
-      <p>{timer}</p>
-    </div>
+            key={index} 
+            element={element} 
+            index={index} />
+        )) ) : (
+          <h3>Nothing found</h3>
+        )}
+        </div>
+          <p>{timer}</p>
+        </div>
   );
 }
 
