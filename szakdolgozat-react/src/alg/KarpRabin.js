@@ -1,11 +1,9 @@
 
-function KR(pattern, text) {
+function preKR(pattern,text){
     let d, hx, hy, i;
     let m =pattern.length;
     let n =text.length;
-    let output=[]
 
-    // Preprocessing
     for (d = i = 1; i < m; ++i) {
         d = (d << 1);
     }
@@ -15,7 +13,18 @@ function KR(pattern, text) {
         hy = ((hy << 1) + text.charCodeAt(i));
     }
 
-    // Searching
+    return [d,m,n,hx,hy]
+}
+
+
+function KR(pattern, text,pre) {
+    let hx=pre[3];
+    let hy=pre[4];
+    let d =pre[0];
+    let m =pre[1];
+    let n =pre[2];
+    let output=[]
+
     let j = 0;
     while (j <= n - m) {
         if (hx === hy && pattern === text.substring(j, j + m)) {
@@ -28,9 +37,7 @@ function KR(pattern, text) {
     return output
 }
 
-// Example usage:
-//const x = "pattern";
-//const y = "textwithpatterndspattern";
-//KR(x, y);
-
-module.exports = KR;
+module.exports = {
+    KR: KR,
+    preKR: preKR
+  };

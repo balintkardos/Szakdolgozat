@@ -5,6 +5,8 @@ const naiv = require('./alg/naiv');
 const notSoNaive = require('./alg/notSoNaive');
 const bm=require('./alg/boyerMoore');
 const kmp=require('./alg/kmp');
+const shiftOr=require('./alg/shiftOr');
+const kr=require('./alg/KarpRabin');
 
 function App() {
   const [selectedAlgorithm, setSelectedAlgorithm] = useState(-1);
@@ -75,7 +77,25 @@ function App() {
       setOutput(naiv.naiveH(patternInput,textInput,hibaInput));
       const endTime = performance.now();
       setTimerSearch((endTime - startTime));
-    } 
+    }else if(selectedAlgorithm===7){
+      //Shift Or algoritmus
+      setTimerPre(0);
+      const startTime = performance.now();
+      setOutput(shiftOr(patternInput,textInput));
+      const endTime = performance.now();
+      setTimerSearch((endTime - startTime));
+    }else if(selectedAlgorithm===8){
+      //Karp Rabin algoritmus
+      const startPre = performance.now();
+      let preTable=kr.preKR(patternInput,textInput);
+      const endPre = performance.now();
+      setTimerPre(endPre-startPre);
+      const startTime = performance.now();
+      setOutput(kr.KR(patternInput,textInput,preTable));
+      const endTime = performance.now();
+      setTimerSearch((endTime - startTime));
+
+    }
 
   };
 
@@ -86,12 +106,8 @@ function App() {
       setDescription("Ez a Not so naive algoritmus");
     } else if(selectedAlgorithm===2){
       setDescription("Ez a Boyer-Moore algoritmus");
-    } else if(selectedAlgorithm===3){
-      setDescription("Ez a Quik Search algoritmus");
     } else if(selectedAlgorithm===4){
       setDescription("Ez a Knut-Morris-Pratt algoritmus");
-    } else if(selectedAlgorithm===5){
-      setDescription("Ez a Apostolico-Giancarlo algoritmus");
     } else if(selectedAlgorithm===6){
       setDescription("Ez a Aho-Corasick algoritmus");
     } else if(selectedAlgorithm===7){
@@ -137,11 +153,6 @@ function App() {
           setSelectedAlgorithm(4);
           }}>Knut-Morris-Pratt</button>
         <button className="algorithm-button"
-        style={{backgroundColor: (selectedAlgorithm===5) ? "#42b983" : "#555a64"}}   
-        onClick={() => {
-          setSelectedAlgorithm(5);
-          }}>Apostolico-Giancarlo</button>
-        <button className="algorithm-button"
         style={{backgroundColor: (selectedAlgorithm===6) ? "#42b983" : "#555a64"}}   
         onClick={() => {
           setSelectedAlgorithm(6);
@@ -150,7 +161,7 @@ function App() {
         style={{backgroundColor: (selectedAlgorithm===7) ? "#42b983" : "#555a64"}}   
         onClick={() => {
           setSelectedAlgorithm(7);
-          }}>Shift-or</button>
+          }}>Shift-Or</button>
         <button className="algorithm-button"
         style={{backgroundColor: (selectedAlgorithm===8) ? "#42b983" : "#555a64"}}   
         onClick={() => {
@@ -187,6 +198,7 @@ function App() {
           <div>
             <p>Hiba:</p>
             <input
+              className="input-hiba"
               type="number"
               min="0"
               placeholder="0 <= Szám"
