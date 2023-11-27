@@ -12,7 +12,8 @@ function App() {
   const [textInput, setTextInput] = useState('');
   const [patternInput, setPatternInput] = useState('');
   const [hibaInput, setHibaInput] = useState('');
-  const [timer, setTimer] = useState(null);
+  const [timerSearch, setTimerSearch] = useState(0);
+  const [timerPre, setTimerPre] = useState(0);
   const [output, setOutput] = useState([]);
 
   const handleSearchClick = () => {
@@ -25,43 +26,55 @@ function App() {
       return 0;
     }
     if(selectedAlgorithm===0){
+      //Naiv algoritmus
+      setTimerPre(0);
       const startTime = performance.now();
       setOutput(naiv.naive(patternInput,textInput));
       const endTime = performance.now();
-      setTimer((endTime - startTime));
+      setTimerSearch((endTime - startTime));
 
     }else if(selectedAlgorithm===2){
+      //Boyer-Moore algoritmus
+      const startPre = performance.now();
       let bcTable=bm.bad_character_table(patternInput);
       let gsTable=bm.good_suffix_table(patternInput);
       let fsTable=bm.full_shift_table(patternInput);
+      const endPre = performance.now();
+      setTimerPre(endPre-startPre);
       const startTime = performance.now();
       setOutput(bm.boyerMoore(patternInput,textInput,bcTable,gsTable,fsTable));
       const endTime = performance.now();
-      setTimer((endTime - startTime));
+      setTimerSearch((endTime - startTime));
     }else if(selectedAlgorithm===4){
+      //KMP algoritmus
+      const startPre = performance.now();
       let preTable=kmp.kmpPrefix(patternInput)
+      const endPre = performance.now();
+      setTimerPre(endPre-startPre);
       const startTime = performance.now();
       setOutput(kmp.kmp(patternInput,textInput,preTable));
       const endTime = performance.now();
-      setTimer((endTime - startTime));
+      setTimerSearch((endTime - startTime));
 
     }else if(selectedAlgorithm===1){
+      //Not so Naiv algoritmus
+      setTimerPre(0);
       const startTime = performance.now();
       setOutput(notSoNaive(patternInput,textInput));
       const endTime = performance.now();
-      setTimer((endTime - startTime));
+      setTimerSearch((endTime - startTime));
 
     }else if(selectedAlgorithm===10){
+      //Naiv Hibával algoritmus
       if(patternInput === ''){
         alert('Hiba mező nem lehet üres!');
         return 0;
       }
+      setTimerPre(0);
       const startTime = performance.now();
-      let out=naiv.naiveH(patternInput,textInput,hibaInput);
-      setOutput(out);
+      setOutput(naiv.naiveH(patternInput,textInput,hibaInput));
       const endTime = performance.now();
-      console.log(out);
-      setTimer((endTime - startTime));
+      setTimerSearch((endTime - startTime));
     } 
 
   };
@@ -185,18 +198,20 @@ function App() {
       </div>
       <button className="input-button" onClick={handleSearchClick}>Search</button>
       <div>
-      {output.length > 0 ? (
-        output.map((element, index) => (
-          <OutputArea 
-            key={index} 
-            element={element} 
-            index={index} />
-        )) ) : (
-          <h3>Nothing found</h3>
-        )}
-        </div>
-          <p>{timer}</p>
-        </div>
+      <p>Előfeldolgozás ideje: {timerPre} ms</p>
+      <p>Keresési ideje: {timerSearch} ms</p>
+      <p>Teljes idő: {timerSearch+timerPre} ms</p>
+        {output.length > 0 ? (
+          output.map((element, index) => (
+            <OutputArea 
+              key={index} 
+              element={element} 
+              index={index} />
+          )) ) : (
+            <h3>Nothing found</h3>
+          )}
+      </div>
+      </div>
   );
 }
 
