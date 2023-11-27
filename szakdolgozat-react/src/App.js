@@ -134,15 +134,20 @@ function App() {
         <div>Leírás: {description}</div>
       </div>
       <div className="inputField">
-        <p>Text:</p>
-        <input
-          type="text"
+        <p>Szöveg:</p>
+        <textarea
+          className="input-text"
+          placeholder="Szöveg"
+          maxLength="500000000"
           value={textInput}
           onChange={(e) => setTextInput(e.target.value)}
+          rows="20"
         />
-        <p>Pattern:</p>
+        <p>Minta:</p>
         <input
+          className="input-pattern"
           type="text"
+          placeholder="Minta"
           value={patternInput}
           onChange={(e) => setPatternInput(e.target.value)}
         />
@@ -152,6 +157,7 @@ function App() {
             <input
               type="number"
               min="0"
+              placeholder="0 <= Szám"
               value={hibaInput}
               onChange={(e) => setHibaInput(e.target.value)}
             />

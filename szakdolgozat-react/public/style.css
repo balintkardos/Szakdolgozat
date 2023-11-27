@@ -21,3 +21,36 @@ body {
     box-sizing: border-box;
     cursor: pointer;
 }
+.input-text {
+    font-family: 'Karla', sans-serif;
+    background: #424549;
+    color: #fff;
+    border: 0;
+    border-radius: 3px;
+    min-height: 32px;
+    width: 90vw;
+    resize: none;
+    &:focus {
+        outline: #7289da solid;
+      }
+    &:focus {
+        outline: #7289da solid;
+      }
+}
+
+.input-pattern {
+    font-family: 'Karla', sans-serif;
+    background: #424549;
+    color: #fff;
+    border: 0;
+    border-radius: 3px;
+    min-height: 32px;
+    width: 90vw;
+    resize: none;
+    &:focus {
+        outline: #7289da solid;
+      }
+    &:focus {
+        outline: #7289da solid;
+      }
+}
