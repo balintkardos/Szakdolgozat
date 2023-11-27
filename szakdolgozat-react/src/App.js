@@ -2,6 +2,9 @@
 import OutputArea from './OutputArea';
 import React, { useState } from 'react';
 const naiv = require('./alg/naiv');
+const notSoNaive = require('./alg/notSoNaive');
+const bm=require('./alg/boyerMoore');
+const kmp=require('./alg/kmp');
 
 function App() {
   const [selectedAlgorithm, setSelectedAlgorithm] = useState(-1);
@@ -27,7 +30,28 @@ function App() {
       const endTime = performance.now();
       setTimer((endTime - startTime));
 
-    } else if(selectedAlgorithm===10){
+    }else if(selectedAlgorithm===2){
+      let bcTable=bm.bad_character_table(patternInput);
+      let gsTable=bm.good_suffix_table(patternInput);
+      let fsTable=bm.full_shift_table(patternInput);
+      const startTime = performance.now();
+      setOutput(bm.boyerMoore(patternInput,textInput,bcTable,gsTable,fsTable));
+      const endTime = performance.now();
+      setTimer((endTime - startTime));
+    }else if(selectedAlgorithm===4){
+      let preTable=kmp.kmpPrefix(patternInput)
+      const startTime = performance.now();
+      setOutput(kmp.kmp(patternInput,textInput,preTable));
+      const endTime = performance.now();
+      setTimer((endTime - startTime));
+
+    }else if(selectedAlgorithm===1){
+      const startTime = performance.now();
+      setOutput(notSoNaive(patternInput,textInput));
+      const endTime = performance.now();
+      setTimer((endTime - startTime));
+
+    }else if(selectedAlgorithm===10){
       if(patternInput === ''){
         alert('Hiba mező nem lehet üres!');
         return 0;
@@ -95,11 +119,6 @@ function App() {
           setSelectedAlgorithm(2);
           }}>Boyer-Moore</button>
         <button className="algorithm-button"
-        style={{backgroundColor: (selectedAlgorithm===3) ? "#42b983" : "#555a64"}} 
-        onClick={() => {
-          setSelectedAlgorithm(3);
-          }}>Quik Search</button>
-        <button className="algorithm-button"
         style={{backgroundColor: (selectedAlgorithm===4) ? "#42b983" : "#555a64"}}   
         onClick={() => {
           setSelectedAlgorithm(4);
@@ -134,21 +153,21 @@ function App() {
         <div>Leírás: {description}</div>
       </div>
       <div className="inputField">
-        <p>Szöveg:</p>
+        <p>Szöveg, amibe keresni szertnél:</p>
         <textarea
           className="input-text"
           placeholder="Szöveg"
           maxLength="500000000"
           value={textInput}
-          onChange={(e) => setTextInput(e.target.value)}
           rows="20"
+          onChange={(e) => setTextInput(e.target.value)}
         />
-        <p>Minta:</p>
-        <input
+        <p>Minta, amit meg szeretnél találni:</p>
+        <textarea
           className="input-pattern"
-          type="text"
           placeholder="Minta"
           value={patternInput}
+          rows="2"
           onChange={(e) => setPatternInput(e.target.value)}
         />
         {selectedAlgorithm === 10 ? (
@@ -163,8 +182,8 @@ function App() {
             />
           </div>
         ) : null}
-        <button className="input-button" onClick={handleSearchClick}>Search</button>
       </div>
+      <button className="input-button" onClick={handleSearchClick}>Search</button>
       <div>
       {output.length > 0 ? (
         output.map((element, index) => (

@@ -105,16 +105,11 @@ function full_shift_table(S) {
     return F;
 }
 
-function boyerMoore(P, T) {
+function boyerMoore(P, T, R, L, F) {
     if (P.length === 0 || T.length === 0 || T.length < P.length) {
         return [];
     }
-
     const matches = [];
-    const R = bad_character_table(P);
-    const L = good_suffix_table(P);
-    const F = full_shift_table(P);
-
     let k = P.length - 1;
     let previous_k = -1;
 
@@ -150,34 +145,8 @@ function boyerMoore(P, T) {
 
     return matches;
 }
-/*
-def approximate_match(p,t,n):
-    segment_length = int(round(len(p)/(n+1)))
-    all_matches = set()
-    for i in Range(n+1):
-        start = i*segment_length
-        end = min((i+1)*segment_length,len(p))
-        matches = boyerMoore(p[start:end],t)
 
-        mismatches = 0
-        for m in matches:
-            if m < start or m-start+len(p) > len(t):
-                continue
-            mismatches = 0
-            for j in range(0,start):
-                if not p[j] == t[m-start+j]:
-                    mismatches+=1
-                    if mismatches > n:
-                        break
-            for j in range(end,len(p)):
-                if not p[j] == t[m-start+j]:
-                    mismatches+=1
-                    if mismatches > n:
-                        break
-            if mismatches <= n:
-                all_matches.app(m-start)
-    return FileList(all_matches)
-*/
+/*
 function approximateMatch(p, t, n) {
     const segmentLength = Math.round(p.length / (n + 1));
     const allMatches = new Set();
@@ -219,5 +188,11 @@ function approximateMatch(p, t, n) {
   
     return Array.from(allMatches);
   }
+*/
 
-module.exports = boyerMoore;
+  module.exports = {
+    boyerMoore: boyerMoore,
+    full_shift_table: full_shift_table,
+    bad_character_table: bad_character_table,
+    good_suffix_table: good_suffix_table
+  };
