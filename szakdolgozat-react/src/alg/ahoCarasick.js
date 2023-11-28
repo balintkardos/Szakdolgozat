@@ -6,7 +6,7 @@ class TrieNode {
     }
   }
   
-  class AhoCorasick {
+class AhoCorasick {
     constructor() {
       this.root = new TrieNode();
     }
@@ -25,14 +25,12 @@ class TrieNode {
     buildFailureLinks() {
       const queue = [];
   
-      // Set failure links for depth 1 (child nodes of the root)
       for (const key in this.root.children) {
         const child = this.root.children[key];
         child.failure = this.root;
         queue.push(child);
       }
   
-      // Set failure links using BFS
       while (queue.length > 0) {
         const currentNode = queue.shift();
   
@@ -78,7 +76,10 @@ class TrieNode {
       return results;
     }
   }
+
+  module.exports = AhoCorasick;
   
+  /*
   // Példa használat:
   const ac = new AhoCorasick();
   
@@ -106,4 +107,4 @@ class TrieNode {
   //https://www.geeksforgeeks.org/aho-corasick-algorithm-pattern-searching/
 
   //https://www.youtube.com/watch?v=w9-n3jW7q3s
-  
+  */

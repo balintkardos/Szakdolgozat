@@ -7,12 +7,17 @@ const bm=require('./alg/boyerMoore');
 const kmp=require('./alg/kmp');
 const shiftOr=require('./alg/shiftOr');
 const kr=require('./alg/KarpRabin');
+const AhoCorasick =require('./alg/ahoCarasick');
 
 function App() {
   const [selectedAlgorithm, setSelectedAlgorithm] = useState(-1);
   const [description, setDescription] = useState("Ez a naive algoritmus");
   const [textInput, setTextInput] = useState('');
   const [patternInput, setPatternInput] = useState('');
+  const [patternInput2, setPatternInput2] = useState('');
+  const [patternInput3, setPatternInput3] = useState('');
+  const [patternInput4, setPatternInput4] = useState('');
+  const [patternInput5, setPatternInput5] = useState('');
   const [hibaInput, setHibaInput] = useState('');
   const [timerSearch, setTimerSearch] = useState(0);
   const [timerPre, setTimerPre] = useState(0);
@@ -67,7 +72,7 @@ function App() {
       setTimerSearch((endTime - startTime));
 
     }else if(selectedAlgorithm===10){
-      //Naiv Hibával algoritmus
+      //Naiv Hamming Distance algoritmus
       if(patternInput === ''){
         alert('Hiba mező nem lehet üres!');
         return 0;
@@ -93,6 +98,25 @@ function App() {
       const startTime = performance.now();
       setOutput(kr.KR(patternInput,textInput,preTable));
       const endTime = performance.now();
+      setTimerSearch((endTime - startTime));
+
+    }else if(selectedAlgorithm===6){
+      //Karp Rabin algoritmus
+      const startPre = performance.now();
+      let acClass= new AhoCorasick();
+      acClass.addPattern(patternInput);
+      if(patternInput2!==''){acClass.addPattern(patternInput2);}
+      if(patternInput3!==''){acClass.addPattern(patternInput3);}
+      if(patternInput4!==''){acClass.addPattern(patternInput4);}
+      if(patternInput5!==''){acClass.addPattern(patternInput5);}
+      acClass.buildFailureLinks();
+      const endPre = performance.now();
+      setTimerPre(endPre-startPre);
+      const startTime = performance.now();
+      const matches= acClass.search(textInput);
+      const endTime = performance.now();
+      setOutput('');
+      console.log(matches)
       setTimerSearch((endTime - startTime));
 
     }
@@ -194,9 +218,41 @@ function App() {
           rows="2"
           onChange={(e) => setPatternInput(e.target.value)}
         />
+        {selectedAlgorithm === 6 ? (
+          <div>
+            <p>Minta 2:</p>
+            <textarea
+              className="input-pattern"
+              placeholder="Minta 2"
+              value={patternInput2}
+              onChange={(e) => setPatternInput2(e.target.value)}
+            />
+            <p>Minta 3:</p>
+            <textarea
+              className="input-pattern"
+              placeholder="Minta 3"
+              value={patternInput3}
+              onChange={(e) => setPatternInput3(e.target.value)}
+            />
+            <p>Minta 4:</p>
+            <textarea
+              className="input-pattern"
+              placeholder="Minta 4"
+              value={patternInput4}
+              onChange={(e) => setPatternInput4(e.target.value)}
+            />
+            <p>Minta 5:</p>
+            <textarea
+              className="input-pattern"
+              placeholder="Minta 5"
+              value={patternInput5}
+              onChange={(e) => setPatternInput5(e.target.value)}
+            />
+          </div>
+        ) : null}
         {selectedAlgorithm === 10 ? (
           <div>
-            <p>Hiba:</p>
+            <p>Hamming Távolság:</p>
             <input
               className="input-hiba"
               type="number"
@@ -213,14 +269,19 @@ function App() {
       <p>Előfeldolgozás ideje: {timerPre} ms</p>
       <p>Keresési ideje: {timerSearch} ms</p>
       <p>Teljes idő: {timerSearch+timerPre} ms</p>
-        {output.length > 0 ? (
+        {(output.length > 0 && selectedAlgorithm !== 6) ? (
           output.map((element, index) => (
             <OutputArea 
               key={index} 
               element={element} 
               index={index} />
-          )) ) : (
-            <h3>Nothing found</h3>
+          )) ) : (selectedAlgorithm === 6 && output.length > 0) ? (
+            console.log(output),
+            null
+            // Your code for the third choice when selectedAlgorithm is 6
+          ) : (
+            <h3>Nem talált semmit</h3>
+            // Your code for the third choice when neither condition is met
           )}
       </div>
       </div>

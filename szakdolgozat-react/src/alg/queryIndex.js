@@ -28,7 +28,8 @@ def queryIndex(p,t,index):
     return offsets
 */
 
-//bit search
+//HammingDistance es keresés
+
 
 class Index {
     constructor(t, k) {
