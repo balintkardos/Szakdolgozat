@@ -1,5 +1,6 @@
 // OutputArea.js
 import React from 'react';
+import DotComponent from './dot'
 
 function szazalek(e,full){
   const percentage = (e / full) * 100;
@@ -7,13 +8,11 @@ function szazalek(e,full){
 }
 
 const OutputArea = (props) => {
-  // eslint-disable-next-line
-  {console.log(props)}
   return (
     <div>
-      <h3>Algorithm Output {props.index}:</h3>
-      <p>hely: {props.element}</p>
-      <p>szazalek: {szazalek(props.element,props.long)}</p>
+      <h4>Találat {props.index}</h4>
+      <p>helye: {props.element}/{props.long}</p>
+      <DotComponent number={szazalek(props.element,props.long)}/>
     </div>
   );
 };

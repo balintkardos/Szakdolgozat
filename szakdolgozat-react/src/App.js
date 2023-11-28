@@ -1,6 +1,6 @@
-
-import OutputArea from './OutputArea';
 import React, { useState } from 'react';
+import OutputArea from './OutputArea';
+import OutputAreaAC from './OutputAreaAC';
 const naiv = require('./alg/naiv');
 const notSoNaive = require('./alg/notSoNaive');
 const bm=require('./alg/boyerMoore');
@@ -279,9 +279,11 @@ function App() {
       </div>
       <button className="input-button" onClick={handleSearchClick}>Search</button>
       <div>
-      <p>Előfeldolgozás ideje: {timerPre} ms</p>
-      <p>Keresési ideje: {timerSearch} ms</p>
-      <p>Teljes idő: {timerSearch+timerPre} ms</p>
+      <hr></hr>
+      <h3>Előfeldolgozás ideje: {timerPre} ms</h3>
+      <h3>Keresési ideje: {timerSearch} ms</h3>
+      <h3>Teljes idő: {timerSearch+timerPre} ms</h3>
+      <hr></hr>
         {(output.length > 0 && selectedAlgorithm !== 6 ) ? (
           output.map((element, index) => (
             <OutputArea 
@@ -290,13 +292,14 @@ function App() {
               index={index}
               long={textInput.length} />
           )) ) : (selectedAlgorithm === 6 && output.length > 0 ) ? (
-            output.forEach(item =>{
-              console.log(item.pattern,item.index);
-            }),
-            <h3>Talált</h3>
-            // Your code for the third choice when selectedAlgorithm is 6
-          ) : (
-            <h3>Nem talált semmit</h3>
+            output.map((item, index)=>(
+              <OutputAreaAC 
+                key={index} 
+                pattern={item.pattern} 
+                index={item.index}
+                long={textInput.length} />
+            )) ) : (
+              <h3>Nem talált semmit</h3>
             // Your code for the third choice when neither condition is met
           )}
       </div>
