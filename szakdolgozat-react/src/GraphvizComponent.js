@@ -18,7 +18,6 @@ class Dot extends Component {
   }
 
   draw() {
-    console.log("draw");
     const dotSource = this.props.dotString || "digraph{a->b}";
     graphviz(`#graph-body`).renderDot(dotSource);
   }

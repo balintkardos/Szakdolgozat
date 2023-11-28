@@ -125,7 +125,6 @@ function App() {
       //Suffix Fa algoritmus
       const startPre = performance.now();
       const suffixTree = new SuffixTree(textInput);
-      //console.log(suffixTree.printTree());
       const endPre = performance.now();
       setTimerPre(endPre-startPre);
       const startTime = performance.now();
