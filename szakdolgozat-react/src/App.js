@@ -113,10 +113,8 @@ function App() {
       const endPre = performance.now();
       setTimerPre(endPre-startPre);
       const startTime = performance.now();
-      const matches= acClass.search(textInput);
+      setOutput(acClass.search(textInput));
       const endTime = performance.now();
-      setOutput('');
-      console.log(matches)
       setTimerSearch((endTime - startTime));
 
     }
@@ -145,6 +143,12 @@ function App() {
     }  
   }, [selectedAlgorithm]);
 
+  function reset(){
+    setOutput([]);
+    setTimerPre(0);
+    setTimerSearch(0);
+  }
+
 
   return (
     <div className="App">
@@ -152,48 +156,57 @@ function App() {
         <button className="algorithm-button"
           style={{backgroundColor: (selectedAlgorithm===0) ? "#42b983" : "#555a64"}}
           onClick={() => {
+            reset();
             setSelectedAlgorithm(0);
           }}
           >Naive</button>
           <button className="algorithm-button"
           style={{backgroundColor: (selectedAlgorithm===10) ? "#42b983" : "#555a64"}}
           onClick={() => {
+            reset();
             setSelectedAlgorithm(10);
           }}
           >Naive H</button>
         <button className="algorithm-button"
         style={{backgroundColor: (selectedAlgorithm===1) ? "#42b983" : "#555a64"}}
         onClick={() => {
+          reset();
           setSelectedAlgorithm(1);
           }}>Not So Naiv</button>
         <button className="algorithm-button"
         style={{backgroundColor: (selectedAlgorithm===2) ? "#42b983" : "#555a64"}}  
         onClick={() => {
+          reset();
           setSelectedAlgorithm(2);
           }}>Boyer-Moore</button>
         <button className="algorithm-button"
         style={{backgroundColor: (selectedAlgorithm===4) ? "#42b983" : "#555a64"}}   
         onClick={() => {
+          reset();
           setSelectedAlgorithm(4);
           }}>Knut-Morris-Pratt</button>
         <button className="algorithm-button"
         style={{backgroundColor: (selectedAlgorithm===6) ? "#42b983" : "#555a64"}}   
         onClick={() => {
+          reset();
           setSelectedAlgorithm(6);
           }}>Aho-Corasick</button>
         <button className="algorithm-button"
         style={{backgroundColor: (selectedAlgorithm===7) ? "#42b983" : "#555a64"}}   
         onClick={() => {
+          reset();
           setSelectedAlgorithm(7);
           }}>Shift-Or</button>
         <button className="algorithm-button"
         style={{backgroundColor: (selectedAlgorithm===8) ? "#42b983" : "#555a64"}}   
         onClick={() => {
+          reset();
           setSelectedAlgorithm(8);
           }}>Karp and Rabin</button>
         <button className="algorithm-button"
         style={{backgroundColor: (selectedAlgorithm===9) ? "#42b983" : "#555a64"}}   
         onClick={() => {
+          reset();
           setSelectedAlgorithm(9);
           }}>Suffix fa</button>
       </div>
@@ -269,15 +282,18 @@ function App() {
       <p>Előfeldolgozás ideje: {timerPre} ms</p>
       <p>Keresési ideje: {timerSearch} ms</p>
       <p>Teljes idő: {timerSearch+timerPre} ms</p>
-        {(output.length > 0 && selectedAlgorithm !== 6) ? (
+        {(output.length > 0 && selectedAlgorithm !== 6 ) ? (
           output.map((element, index) => (
             <OutputArea 
               key={index} 
               element={element} 
-              index={index} />
-          )) ) : (selectedAlgorithm === 6 && output.length > 0) ? (
-            console.log(output),
-            null
+              index={index}
+              long={textInput.length} />
+          )) ) : (selectedAlgorithm === 6 && output.length > 0 ) ? (
+            output.forEach(item =>{
+              console.log(item.pattern,item.index);
+            }),
+            <h3>Talált</h3>
             // Your code for the third choice when selectedAlgorithm is 6
           ) : (
             <h3>Nem talált semmit</h3>
