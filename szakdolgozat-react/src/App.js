@@ -101,7 +101,7 @@ function App() {
       setTimerSearch((endTime - startTime));
 
     }else if(selectedAlgorithm===6){
-      //Karp Rabin algoritmus
+      //Aho-Corasick algoritmus
       const startPre = performance.now();
       let acClass= new AhoCorasick();
       acClass.addPattern(patternInput);
@@ -114,6 +114,17 @@ function App() {
       setTimerPre(endPre-startPre);
       const startTime = performance.now();
       setOutput(acClass.search(textInput));
+      const endTime = performance.now();
+      setTimerSearch((endTime - startTime));
+
+    }else if(selectedAlgorithm===9){
+      //Suffix Fa algoritmus
+      const startPre = performance.now();
+      
+      const endPre = performance.now();
+      setTimerPre(endPre-startPre);
+      const startTime = performance.now();
+      
       const endTime = performance.now();
       setTimerSearch((endTime - startTime));
 
@@ -215,52 +226,69 @@ function App() {
       </div>
       <div className="inputField">
         <p>Szöveg, amibe keresni szertnél:</p>
+        <div className="parent-container">
         <textarea
           className="input-text"
           placeholder="Szöveg"
-          maxLength="500000000"
           value={textInput}
           rows="20"
           onChange={(e) => setTextInput(e.target.value)}
         />
+        <div className="input-length">{textInput.length}</div>
+        </div>
         <p>Minta, amit meg szeretnél találni:</p>
-        <textarea
-          className="input-pattern"
-          placeholder="Minta"
-          value={patternInput}
-          rows="2"
-          onChange={(e) => setPatternInput(e.target.value)}
-        />
+        <div className="parent-container">
+          <textarea
+            className="input-pattern"
+            placeholder="Minta"
+            value={patternInput}
+            rows="2"
+            onChange={(e) => setPatternInput(e.target.value)}
+          />
+          <div className="input-length">{patternInput.length}</div>
+        </div>
         {selectedAlgorithm === 6 ? (
           <div>
             <p>Minta 2:</p>
-            <textarea
-              className="input-pattern"
-              placeholder="Minta 2"
-              value={patternInput2}
-              onChange={(e) => setPatternInput2(e.target.value)}
-            />
+            <div className="parent-container">
+              <textarea
+                className="input-pattern"
+                placeholder="Minta 2"
+                value={patternInput2}
+                onChange={(e) => setPatternInput2(e.target.value)}
+              />
+              <div className="input-length">{patternInput2.length}</div>
+            </div>
             <p>Minta 3:</p>
+            <div className="parent-container">
             <textarea
               className="input-pattern"
               placeholder="Minta 3"
               value={patternInput3}
               onChange={(e) => setPatternInput3(e.target.value)}
             />
+            <div className="input-length">{patternInput3.length}</div>
+            </div>
             <p>Minta 4:</p>
+            <div className="parent-container">
             <textarea
               className="input-pattern"
               placeholder="Minta 4"
               value={patternInput4}
               onChange={(e) => setPatternInput4(e.target.value)}
             />
+            <div className="input-length">{patternInput4.length}</div>
+            </div>
             <p>Minta 5:</p>
+            <div className="parent-container">
             <textarea
               className="input-pattern"
               placeholder="Minta 5"
               value={patternInput5}
               onChange={(e) => setPatternInput5(e.target.value)}
             />
+            <div className="input-length">{patternInput5.length}</div>
+            </div>
           </div>
         ) : null}
         {selectedAlgorithm === 10 ? (
@@ -300,7 +328,6 @@ function App() {
                 long={textInput.length} />
             )) ) : (
               <h3>Nem talált semmit</h3>
-            // Your code for the third choice when neither condition is met
           )}
       </div>
       </div>

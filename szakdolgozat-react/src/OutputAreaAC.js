@@ -7,8 +7,6 @@ function szazalek(e,full){
 }
 
 const OutputAreaAC = (props) => {
-  // eslint-disable-next-line
-  {console.log(props)}
   return (
     <div>
         <h4>Találat {props.pattern}</h4>

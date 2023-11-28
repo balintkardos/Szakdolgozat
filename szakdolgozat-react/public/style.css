@@ -100,3 +100,16 @@ body {
   border-radius: 50%;
   display: inline-block;
 }
+
+.parent-container {
+  position: relative;
+  /* Add other styles for the parent container if needed */
+}
+.input-length {
+  color: #282b30;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-right: 10vw;
+  margin-bottom: 10px;
+}
