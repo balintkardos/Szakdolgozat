@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import OutputArea from './OutputArea';
 import OutputAreaAC from './OutputAreaAC';
+import GraphvizComponent from './GraphvizComponent';
 const naiv = require('./alg/naiv');
 const notSoNaive = require('./alg/notSoNaive');
 const bm=require('./alg/boyerMoore');
@@ -8,6 +9,8 @@ const kmp=require('./alg/kmp');
 const shiftOr=require('./alg/shiftOr');
 const kr=require('./alg/KarpRabin');
 const AhoCorasick =require('./alg/ahoCarasick');
+const SuffixTree =require('./alg/newSuffixTree');
+
 
 function App() {
   const [selectedAlgorithm, setSelectedAlgorithm] = useState(-1);
@@ -22,6 +25,7 @@ function App() {
   const [timerSearch, setTimerSearch] = useState(0);
   const [timerPre, setTimerPre] = useState(0);
   const [output, setOutput] = useState([]);
+  const [graph, setGraph] = useState("");
 
   const handleSearchClick = () => {
     if(textInput === ''){
@@ -120,11 +124,12 @@ function App() {
     }else if(selectedAlgorithm===9){
       //Suffix Fa algoritmus
       const startPre = performance.now();
-      
+      const suffixTree = new SuffixTree(textInput);
+      //console.log(suffixTree.printTree());
       const endPre = performance.now();
       setTimerPre(endPre-startPre);
       const startTime = performance.now();
-      
+      setGraph(suffixTree.printTree())
       const endTime = performance.now();
       setTimerSearch((endTime - startTime));
 
@@ -330,6 +335,7 @@ function App() {
               <h3>Nem talált semmit</h3>
           )}
       </div>
+      <GraphvizComponent dotString={graph} />
       </div>
   );
 }

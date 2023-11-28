@@ -78,7 +78,7 @@ class SuffixTree {
     this.linkNode = undefined
     this.remainder++
     while (this.remainder > 0) {
-      if (this.activeLength == 0) {
+      if (this.activeLength === 0) {
         this.activeEdge = this.position
       }
       const activeC = this.getActiveEdge()
@@ -116,7 +116,7 @@ class SuffixTree {
         this.addSuffixLink(split) //rule 2
       }
       this.remainder--
-      if (this.activeNode == this.root && this.activeLength > 0) {
+      if (this.activeNode === this.root && this.activeLength > 0) {
         //rule 1
         this.activeLength--
         this.activeEdge = this.position - this.remainder + 1
@@ -142,7 +142,7 @@ class SuffixTree {
   }
 
   printLeaves(x, out) {
-    if (Object.keys(x.next).length == 0) {
+    if (Object.keys(x.next).length === 0) {
       out.push("\tnode" + x.id + ' [label="",shape=point]')
     } else {
       for (let child of Object.values(x.next)) {
@@ -152,7 +152,7 @@ class SuffixTree {
   }
 
   printInternalNodes(x, out) {
-    if (x != this.root && Object.keys(x.next).length > 0) {
+    if (x !== this.root && Object.keys(x.next).length > 0) {
       out.push(
         "\tnode" +
           x.id +
