@@ -335,7 +335,7 @@ function App() {
               <h3>Nem talált semmit</h3>
           )}
       </div>
-      <GraphvizComponent dotString={graph} />
+      {(graph!=='' && selectedAlgorithm===9)?<GraphvizComponent dotString={graph} />:null}
       </div>
   );
 }

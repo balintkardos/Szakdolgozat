@@ -7,28 +7,25 @@ class Dot extends Component {
     this.draw = this.draw.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.dotString !== prevProps.dotString) {
+      this.draw();
+    }
+  }
+
   componentDidMount() {
     this.draw();
   }
 
-  componentDidUpdate(prevProps) {
-    // Check if the dotSource prop has changed
-    console.log("update");
-      this.draw();
-    
-  }
-
   draw() {
     console.log("draw");
-    // Use the updated dotSource pro
-    const dotSource = this.props.dotSource || "digraph{a->b}";
+    const dotSource = this.props.dotString || "digraph{a->b}";
     graphviz(`#graph-body`).renderDot(dotSource);
   }
 
   render() {
     return (
       <div id="graph-body">
-        {/* Render any additional content or components here */}
       </div>
     );
   }
