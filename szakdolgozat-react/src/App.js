@@ -167,6 +167,7 @@ function App() {
 
   return (
     <div className="App">
+      <h1>String matching algoritmusok</h1>
       <div className="algorithm">
         <button className="algorithm-button"
           style={{backgroundColor: (selectedAlgorithm===0) ? "#42b983" : "#555a64"}}
