@@ -7,11 +7,140 @@
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
     <link href="https://fonts.googleapis.com/css2?family=Inter&family=Karla:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./style.css">
-    <meta name="theme-color" content="#000000" />
+    
+    <style>
+        body {
+          margin: 0;
+          background-color: #282b30;
+          padding: 20px;
+          font-family: 'Karla', sans-serif;
+          color: white;
+        }
+        footer {
+          font-family: 'Karla', sans-serif;
+          font-size: 8px;
+          color: #fff; 
+          text-align: center;
+          bottom: 0;
+          padding-top: 30px;
+          opacity: 60%;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+      .algorithm-button {
+        color: #fff;
+        min-height: 32px;
+        min-width: 60px;
+        font-size: 14px;
+        font-weight: 500;
+        font-family: 'Karla', sans-serif;
+        line-height: 16px;
+        margin: 4px 8px 4px 0;
+        padding: 2px 16px;
+        border: 0;
+        border-radius: 3px;
+        box-sizing: border-box;
+        cursor: pointer;
+      }
+
+      .input-button {
+        background-color: #7289da;
+        color: white;
+        min-height: 32px;
+        min-width: 60px;
+        font-size: 14px;
+        font-weight: 500;
+        font-family: 'Karla', sans-serif;
+        line-height: 16px;
+        margin: 12px 8px 4px 0;
+        padding: 2px 16px;
+        border: 0;
+        border-radius: 3px;
+        box-sizing: border-box;
+        cursor: pointer;
+      }
+
+      .input-text {
+        font-family: 'Karla', sans-serif;
+        background: #424549;
+        color: #fff;
+        border: 0;
+        border-radius: 3px;
+        min-height: 32px;
+        width: 90vw;
+        resize: none;
+        &:focus {
+            outline: #7289da solid;
+          }
+        &:focus {
+            outline: #7289da solid;
+          }
+      }
+
+      .input-pattern {
+        font-family: 'Karla', sans-serif;
+        background: #424549;
+        color: #fff;
+        border: 0;
+        border-radius: 3px;
+        min-height: 32px;
+        width: 90vw;
+        resize: none;
+        &:focus {
+            outline: #7289da solid;
+          }
+        &:focus {
+            outline: #7289da solid;
+          }
+      }
+
+      .input-hiba {
+        font-family: 'Karla', sans-serif;
+        background: #424549;
+        color: #fff;
+        border: 0;
+        border-radius: 3px;
+        min-height: 32px;
+        &:focus {
+            outline: #7289da solid;
+          }
+        &:focus {
+            outline: #7289da solid;
+          }
+      }
+
+      .dot-container {
+        width: 90vw;
+        display: flex;
+        align-items: center; 
+      }
+
+      .dot {
+        height: 10px;
+        width: 10px;
+        border-radius: 50%;
+        display: inline-block;
+      }
+
+      .parent-container {
+        position: relative;
+      }
+      .input-length {
+        color: #282b30;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        margin-right: 10vw;
+        margin-bottom: 10px;
+      }
+    </style>
+    <meta name="theme-color" content="#7289da" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="Kardos Bálint Szakdolgozata String Matching algoritmusok"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
    
@@ -21,7 +150,11 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    
+    <div id="root"></div> 
   </body>
+  <footer>
+    <p>©  2023 Kardos Bálint</p>
+    <p>Szegedi Tudomány Egyetem </p>
+    <p>Programtervező informatikus hallgató</p>
+  </footer>
 </html>
