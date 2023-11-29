@@ -152,8 +152,25 @@ function App() {
   }
 
   function splitOutput(out){
-
-    return <p>Teszt</p>;
+    let dic={};
+    for(let i=0;i<out.length;i++){
+      if(dic[out[i].pattern]){
+        dic[out[i].pattern].push(out[i].index);
+      } else {
+        dic[out[i].pattern]=[out[i].index];
+      }
+    }
+    return Object.keys(dic).map((key) => (
+      <div key={key}>
+        <p>{key}:</p>
+        <HighlightedText
+          key={key}
+          T={textInput}
+          P={key} 
+          indices={dic[key]}
+        />
+      </div>
+    ));
   }
 
 
