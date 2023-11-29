@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import OutputArea from './OutputArea';
 import OutputAreaAC from './OutputAreaAC';
-import GraphvizComponent from './GraphvizComponent';
+import HighlightedText from './HighlightedText';
 const naiv = require('./alg/naiv');
 const notSoNaive = require('./alg/notSoNaive');
 const bm=require('./alg/boyerMoore');
@@ -9,7 +9,6 @@ const kmp=require('./alg/kmp');
 const shiftOr=require('./alg/shiftOr');
 const kr=require('./alg/KarpRabin');
 const AhoCorasick =require('./alg/ahoCarasick');
-const SuffixTree =require('./alg/newSuffixTree');
 
 
 function App() {
@@ -25,7 +24,6 @@ function App() {
   const [timerSearch, setTimerSearch] = useState(0);
   const [timerPre, setTimerPre] = useState(0);
   const [output, setOutput] = useState([]);
-  const [graph, setGraph] = useState("");
 
   const handleSearchClick = () => {
     if(textInput === ''){
@@ -77,7 +75,7 @@ function App() {
 
     }else if(selectedAlgorithm===10){
       //Naiv Hamming Distance algoritmus
-      if(patternInput === ''){
+      if(hibaInput === ''){
         alert('Hiba mező nem lehet üres!');
         return 0;
       }
@@ -121,17 +119,6 @@ function App() {
       const endTime = performance.now();
       setTimerSearch((endTime - startTime));
 
-    }else if(selectedAlgorithm===9){
-      //Suffix Fa algoritmus
-      const startPre = performance.now();
-      const suffixTree = new SuffixTree(textInput);
-      const endPre = performance.now();
-      setTimerPre(endPre-startPre);
-      const startTime = performance.now();
-      setGraph(suffixTree.printTree())
-      const endTime = performance.now();
-      setTimerSearch((endTime - startTime));
-
     }
 
   };
@@ -151,8 +138,6 @@ function App() {
       setDescription("Ez a Shift-or algoritmus");
     } else if(selectedAlgorithm===8){
       setDescription("Ez a Karp and Rabin algoritmus");
-    } else if(selectedAlgorithm===9){
-      setDescription("Ez a Suffix fa");
     } else if(selectedAlgorithm===10){
       setDescription("Ez a Naiv Hibával");
     } else {
@@ -222,12 +207,6 @@ function App() {
           reset();
           setSelectedAlgorithm(8);
           }}>Karp and Rabin</button>
-        <button className="algorithm-button"
-        style={{backgroundColor: (selectedAlgorithm===9) ? "#42b983" : "#555a64"}}   
-        onClick={() => {
-          reset();
-          setSelectedAlgorithm(9);
-          }}>Suffix fa</button>
       </div>
       <div className="description">
         <div>Leírás: {description}</div>
@@ -338,7 +317,9 @@ function App() {
               <h3>Nem talált semmit</h3>
           )}
       </div>
-      {(graph!=='' && selectedAlgorithm===9)?<GraphvizComponent dotString={graph} />:null}
+      <hr></hr>
+      <div>A szövegben:</div>
+      {(output.length > 0 && selectedAlgorithm !== 6 ) ?<HighlightedText T={textInput} P={patternInput} indices={output} /> : null}
       </div>
   );
 }

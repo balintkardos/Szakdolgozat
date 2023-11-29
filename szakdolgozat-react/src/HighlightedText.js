@@ -1,0 +1,28 @@
+import React from 'react';
+
+const HighlightedText = ({ T, P, indices }) => {
+  const renderHighlightedText = () => {
+    let currentPosition = 0;
+    const result = [];
+
+    for (let i = 0; i < indices.length; i++) {
+      const index = indices[i];
+      const beforeText = T.substring(currentPosition, index);
+      currentPosition = index + P.length;
+      const highlightedText = T.substring(index, currentPosition);
+      result.push(
+        <React.Fragment key={i}>
+          {beforeText}
+          <span style={{ backgroundColor: '#7289da' }}>{highlightedText}</span>
+        </React.Fragment>
+      );
+    }
+    result.push(T.substring(currentPosition));
+
+    return result;
+  };
+
+  return <div className='output-text'>{renderHighlightedText()}</div>;
+};
+
+export default HighlightedText;
