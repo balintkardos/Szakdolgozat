@@ -151,6 +151,11 @@ function App() {
     setTimerSearch(0);
   }
 
+  function splitOutput(out){
+
+    return <p>Teszt</p>;
+  }
+
 
   return (
     <div className="App">
@@ -318,7 +323,8 @@ function App() {
           )}
       </div>
       <hr></hr>
-      <div>A szövegben:</div>
+      <h2>A szövegben:</h2>
+      {(output.length > 0 && selectedAlgorithm === 6 ? splitOutput(output):null)}
       {(output.length > 0 && selectedAlgorithm !== 6 ) ?<HighlightedText T={textInput} P={patternInput} indices={output} /> : null}
       </div>
   );
