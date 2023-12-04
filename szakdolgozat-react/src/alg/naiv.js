@@ -1,4 +1,11 @@
-//simpla naiv
+
+/**
+ * Search for occurrences of a pattern within a text using the Naive String Matching algorithm.
+ *
+ * @param {string} pat - The pattern to search for.
+ * @param {string} txt - The text in which to search for the pattern.
+ * @returns {number[]} - An array containing the starting indices of all occurrences of the pattern in the text.
+ */
 function naive(pat, txt) {
   let M = pat.length;
   let N = txt.length;
