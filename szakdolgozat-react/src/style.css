@@ -1,0 +1,151 @@
+body {
+  margin: 0;
+  background-color: #282b30;
+  padding: 20px;
+  font-family: 'Karla', sans-serif;
+  color: white;
+}
+
+hr {
+  width: 99%;
+  margin: 0;
+}
+.hr-egy {
+  margin-top: 10px;
+}
+
+footer {
+  font-family: 'Karla', sans-serif;
+  font-size: 8px;
+  color: #fff; 
+  text-align: center;
+  bottom: 0;
+  padding-top: 30px;
+  opacity: 60%;
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+.App{
+  display:  flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 90vh;
+}
+
+h1 {
+  font-size: 2.5em;
+}
+
+.algorithm-button {
+color: #fff;
+min-height: 32px;
+min-width: 60px;
+font-size: 14px;
+font-weight: 500;
+font-family: 'Karla', sans-serif;
+line-height: 16px;
+margin: 4px 8px 4px 0;
+padding: 2px 16px;
+border: 0;
+border-radius: 3px;
+box-sizing: border-box;
+cursor: pointer;
+}
+
+.input-button {
+background-color: #7289da;
+color: white;
+min-height: 32px;
+min-width: 60px;
+max-width: 100px;
+font-size: 14px;
+font-weight: 500;
+font-family: 'Karla', sans-serif;
+line-height: 16px;
+margin: 12px 8px 15px 0;
+padding: 2px 16px;
+border: 0;
+border-radius: 3px;
+box-sizing: border-box;
+cursor: pointer;
+}
+
+.input-text {
+font-family: 'Karla', sans-serif;
+background: #424549;
+color: #fff;
+border: 0;
+border-radius: 3px;
+min-height: 32px;
+width: 99%;
+resize: none;
+&:focus {
+    outline: #7289da solid;
+  }
+&:focus {
+    outline: #7289da solid;
+  }
+}
+
+.input-pattern {
+font-family: 'Karla', sans-serif;
+background: #424549;
+color: #fff;
+border: 0;
+border-radius: 3px;
+min-height: 32px;
+width: 99%;
+resize: none;
+&:focus {
+    outline: #7289da solid;
+  }
+&:focus {
+    outline: #7289da solid;
+  }
+}
+
+.input-hiba {
+font-family: 'Karla', sans-serif;
+background: #424549;
+color: #fff;
+border: 0;
+border-radius: 3px;
+min-height: 32px;
+&:focus {
+    outline: #7289da solid;
+  }
+&:focus {
+    outline: #7289da solid;
+  }
+}
+
+.dot-container {
+width: 99.3%;
+display: flex;
+align-items: center; 
+}
+
+.dot {
+height: 10px;
+width: 10px;
+display: inline-block;
+}
+
+.parent-container {
+position: relative;
+}
+.input-length {
+color: #282b30;
+position: absolute;
+bottom: 0;
+right: 0;
+margin-right: 1vw;
+margin-bottom: 5px;
+}
+.output-text{
+margin: 5px;
+text-align: justify;
+}

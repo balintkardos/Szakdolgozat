@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import OutputArea from './OutputArea';
 import OutputAreaAC from './OutputAreaAC';
 import HighlightedText from './HighlightedText';
+import './style.css'
 const naiv = require('./alg/naiv');
 const notSoNaive = require('./alg/notSoNaive');
 const bm=require('./alg/boyerMoore');
@@ -177,7 +178,7 @@ function App() {
   return (
     <div className="App">
       <h1>String matching algoritmusok</h1>
-      <h3>Válasz algoritmust:</h3>
+      {selectedAlgorithm===-1?<h3>Válasz algoritmust:</h3>:null} 
       <div className="algorithm">
         <button className="algorithm-button"
           style={{backgroundColor: (selectedAlgorithm===0) ? "#42b983" : "#555a64"}}
@@ -314,9 +315,10 @@ function App() {
           </div>
         ) : null}
       </div>
-      <button className="input-button" onClick={handleSearchClick}>Search</button>
-      <div>
+      <button className="input-button" onClick={handleSearchClick}>Keresés</button>
       <hr></hr>
+      <div>
+      
       <h3>Előfeldolgozás ideje: {timerPre} ms</h3>
       <h3>Keresési ideje: {timerSearch} ms</h3>
       <h3>Teljes idő: {timerSearch+timerPre} ms</h3>
@@ -339,7 +341,7 @@ function App() {
               <h3>Nem talált semmit</h3>
           )}
       </div>
-      <hr></hr>
+      <hr className='hr-egy'/>
       <h2>A szövegben:</h2>
       {(output.length > 0 && selectedAlgorithm === 6 ? splitOutput(output):null)}
       {(output.length > 0 && selectedAlgorithm !== 6 ) ?<HighlightedText T={textInput} P={patternInput} indices={output} /> : null}
