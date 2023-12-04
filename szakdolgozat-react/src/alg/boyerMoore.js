@@ -190,9 +190,9 @@ function approximateMatch(p, t, n) {
   }
 */
 
-  module.exports = {
+module.exports = {
     boyerMoore: boyerMoore,
     full_shift_table: full_shift_table,
     bad_character_table: bad_character_table,
     good_suffix_table: good_suffix_table
-  };
+};

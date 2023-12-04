@@ -1,47 +1,47 @@
 //simpla naiv
-function naive(pat,txt){
-    let M=pat.length;
-    let N=txt.length;
-    const result = [];
+function naive(pat, txt) {
+  let M = pat.length;
+  let N = txt.length;
+  const result = [];
 
-    for (let i=0; i<=(N-M);i++){
-      let j;
-      for (j=0; j <M;j++){
-        if(txt[i+j]!==pat[j]){
-          break;
-        }
-      }
-      if(j===M){
-         result.push(i);
+  for (let i = 0; i <= (N - M); i++) {
+    let j;
+    for (j = 0; j < M; j++) {
+      if (txt[i + j] !== pat[j]) {
+        break;
       }
     }
-     
-    return result;
+    if (j === M) {
+      result.push(i);
+    }
+  }
+
+  return result;
 }
 
 //hibával is müködik
 
-function naiveH(pat,txt,hdistance){
-  let M=pat.length;
-  let N=txt.length;
+function naiveH(pat, txt, hdistance) {
+  let M = pat.length;
+  let N = txt.length;
   const result = [];
 
-  for (let i=0; i<=(N-M);i++){
+  for (let i = 0; i <= (N - M); i++) {
     let j;
-    let nmm= 0;
-    for (j=0; j <M;j++){
-      if(txt[i+j]!==pat[j]){
+    let nmm = 0;
+    for (j = 0; j < M; j++) {
+      if (txt[i + j] !== pat[j]) {
         nmm++;
-        if(nmm>hdistance){
+        if (nmm > hdistance) {
           break;
         }
       }
     }
-    if(nmm <= hdistance){
-       result.push(i);
+    if (nmm <= hdistance) {
+      result.push(i);
     }
   }
-   
+
   return result;
 }
 

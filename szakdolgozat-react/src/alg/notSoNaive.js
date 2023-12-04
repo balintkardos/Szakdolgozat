@@ -1,8 +1,8 @@
 
 function notSoNaive(pattern, text) {
     let j, k, ell;
-    let m=pattern.length;
-    let n=text.length;
+    let m = pattern.length;
+    let n = text.length;
 
     // Preprocessing
     if (pattern[0] === pattern[1]) {
@@ -15,7 +15,7 @@ function notSoNaive(pattern, text) {
 
     // Searching
     j = 0;
-    let output=[];
+    let output = [];
     while (j <= n - m) {
         if (pattern[1] !== text[j + 1]) {
             j += k;
