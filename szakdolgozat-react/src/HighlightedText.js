@@ -1,5 +1,13 @@
 import React from 'react';
 
+/**
+ * Functional component ami ki rendereli a  kiemeli a szöveget meghatározott indexek alapján.
+ * @param {Object} props - Component properties.
+ * @param {string} props.T - A szöveg.
+ * @param {string} props.P - A minta amit kiemel.
+ * @param {Array.<number>} props.indices - Amiket ki kell emelni.
+ * @returns {JSX.Element} - React JSX element.
+ */
 const HighlightedText = ({ T, P, indices }) => {
   const renderHighlightedText = () => {
     let currentPosition = 0;

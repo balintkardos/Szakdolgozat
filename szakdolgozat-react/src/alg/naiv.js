@@ -1,10 +1,8 @@
-
 /**
- * Search for occurrences of a pattern within a text using the Naive String Matching algorithm.
- *
- * @param {string} pat - The pattern to search for.
- * @param {string} txt - The text in which to search for the pattern.
- * @returns {number[]} - An array containing the starting indices of all occurrences of the pattern in the text.
+ * Végrehajtja a naiv mintaillesztési algoritmust, hogy megtalálja a mintaegyezéseket a szövegben.
+ * @param {string} pat - A keresendő minta.
+ * @param {string} txt - A szöveg amiben keresünk.
+ * @returns {Array.<number>} - Indexek tömbje, ahol egyezések találhatók.
  */
 function naive(pat, txt) {
   let M = pat.length;
@@ -26,8 +24,13 @@ function naive(pat, txt) {
   return result;
 }
 
-//hibával is müködik
-
+/**
+ * Végrehajtja a naiv mintaillesztési algoritmust egy megadott Hamming-távolsággal.
+ * @param {string} pat - A keresendő minta.
+ * @param {string} txt - A szöveg amiben keresünk.
+ * @param {number} hdistance - A megengedett legnagyobb Hamming-távolság.
+ * @returns {Array.<number>} - Indexek tömbje, ahol egyezések találhatók.
+ */
 function naiveH(pat, txt, hdistance) {
   let M = pat.length;
   let N = txt.length;
@@ -52,7 +55,10 @@ function naiveH(pat, txt, hdistance) {
   return result;
 }
 
-//exportálás
+/**
+ * Exportálja a naiv mintaillesztési algoritmusokat más modulokban való használatra.
+ * @module NaivePatternMatching
+ */
 module.exports = {
   naive: naive,
   naiveH: naiveH

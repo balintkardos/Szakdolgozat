@@ -1,4 +1,9 @@
-
+/**
+ * Előfeldolgozása Karp-Rabin algoritmusnak.
+ * @param {string} pattern - A minta string.
+ * @param {string} text - A szöveg string.
+ * @returns {Array.<number>} - A tömb ami tartalmazza a pre-processing végeredményét.
+ */
 function preKR(pattern, text) {
     let d, hx, hy, i;
     let m = pattern.length;
@@ -16,7 +21,13 @@ function preKR(pattern, text) {
     return [d, m, n, hx, hy]
 }
 
-
+/**
+ * Végrehajtja a Karp-Rabin algoritmust hogy megtalálja a minta előfordulását a szövegbe
+ * @param {string} pattern - A minta string amit keresünk
+ * @param {string} text - A szöveg string amin keresünk.
+ * @param {Array.<number>} pre - Az előfeldolgozás a preKR függvény eredménye.
+ * @returns {Array.<number>} - Indexek tömbje, ahol egyezések találhatók.
+ */
 function KR(pattern, text, pre) {
     let hx = pre[3];
     let hy = pre[4];
@@ -37,6 +48,10 @@ function KR(pattern, text, pre) {
     return output
 }
 
+/**
+ * Exportálja a Karp-Rabin algoritmust és az előfeldolgozási függvényt más modulokban való használatra.
+ * @module KarpRabin
+ */
 module.exports = {
     KR: KR,
     preKR: preKR

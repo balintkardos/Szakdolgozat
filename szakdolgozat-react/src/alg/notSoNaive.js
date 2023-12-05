@@ -1,10 +1,14 @@
-
+/**
+ * Végrehajtja a "Not so naiv" mintaillesztő algoritmust, hogy megtalálja a mintaegyezéseket a szövegben.
+ * @param {string} pattern - A keresendő minta.
+ * @param {string} text - A szöveg amiben keresünk.
+ * @returns {Array.<number>} - Indexek tömbje, ahol egyezések találhatók.
+ */
 function notSoNaive(pattern, text) {
     let j, k, ell;
     let m = pattern.length;
     let n = text.length;
 
-    // Preprocessing
     if (pattern[0] === pattern[1]) {
         k = 2;
         ell = 1;
@@ -13,7 +17,6 @@ function notSoNaive(pattern, text) {
         ell = 2;
     }
 
-    // Searching
     j = 0;
     let output = [];
     while (j <= n - m) {
@@ -32,7 +35,10 @@ function notSoNaive(pattern, text) {
     return output;
 }
 
-
+/**
+ * Exportálja a "Not So Naive" mintaillesztési algoritmust más modulokban való használatra.
+ * @module NotSoNaivePatternMatching
+ */
 module.exports = notSoNaive;
 
 

@@ -1,4 +1,8 @@
-
+/**
+ * Kiszámítja a Knuth-Morris-Pratt (KMP) algoritmus prefix táblázatát.
+ * @param {string} s - Minta string.
+ * @returns {Array.<number>} - Kiszámolt prefix tábla.
+ */
 function kmpPrefix(s) {
   let p = [0];
   let j = 0;
@@ -14,6 +18,13 @@ function kmpPrefix(s) {
   return p;
 }
 
+/**
+ * Végrehajtja a Knuth-Morris-Pratt (KMP) algoritmust, hogy megtalálja a mintaegyezéseket a szövegben.
+ * @param {string} pat - A minta amit keresük.
+ * @param {string} txt - A szöveg amin keresünk.
+ * @param {Array.<number>} prefixTable - A kmpPrefix függvény segítségével kiszámított előtag táblázat.
+ * @returns {Array.<number>} - Indexek tömbje, ahol egyezések találhatók.
+ */
 function kmp(pat, txt, prefixTable) {
   let M = pat.length
   let N = txt.length
@@ -37,6 +48,10 @@ function kmp(pat, txt, prefixTable) {
   return result
 }
 
+/**
+ * Exportálja a KMP algoritmust és az előtagtábla számítási függvényét más modulokban való használatra.
+ * @module KMP
+ */
 module.exports = {
   kmp: kmp,
   kmpPrefix: kmpPrefix

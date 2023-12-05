@@ -1,16 +1,56 @@
+/**
+* Az Aho-Corasick algoritmus által használt Trie csomópontját jelöli.
+* @class
+*/
 class TrieNode {
+  /**
+  * Inicializál egy új TrieNode-ot.
+  * @constructor
+  */
   constructor() {
+    /**
+     * Az aktuális csomópont gyermekcsomópontjait reprezentáló szótár.
+     * @type {Object.<string, TrieNode>}
+     */
     this.children = {};
+
+    /**
+     * Egy tömb, amely ennél a csomópontnál végződő mintákat tartalmaz.
+     * @type {Array.<string>}
+     */
     this.output = [];
+
+    /**
+     * Hivatkozás a Trie hibacsomópontjára.
+     * @type {TrieNode|null}
+     */
     this.failure = null;
   }
 }
 
+/**
+* Az Aho-Corasick algoritmust.
+* @class
+*/
 class AhoCorasick {
+
+  /**
+   * Inicializál egy új AhoCorasick-példányt egy üres Trie-vel.
+   * @constructor
+   */
   constructor() {
+
+    /**
+     * Az Aho-Corasick algoritmusban használt Trie gyökércsomópontja.
+     * @type {TrieNode}
+     */
     this.root = new TrieNode();
   }
 
+  /**
+   * Mintát hozzáadja a Trie-hez.
+   * @param {string} pattern - Minta amit a Trie-hez ad.
+   */
   addPattern(pattern) {
     let node = this.root;
     for (let char of pattern) {
@@ -22,6 +62,9 @@ class AhoCorasick {
     node.output.push(pattern);
   }
 
+  /**
+   * A mintaillesztés optimalizálása érdekében létrehozza a hibahivatkozásokat a Trie-ben.
+   */
   buildFailureLinks() {
     const queue = [];
 
@@ -51,6 +94,12 @@ class AhoCorasick {
     }
   }
 
+  /**
+   * Megkeresi az adott mintátkat a szövegbe Aho-Corasick algoritmusal.
+   * @param {string} text - A minták kereséséhez szükséges szöveg.
+   * @returns {Array.<{ pattern: string, index: number }>} - Egyező mintákat és indexeiket tartalmazó objektumok tömbje.
+   */
+
   search(text) {
     let node = this.root;
     const results = [];
@@ -77,34 +126,8 @@ class AhoCorasick {
   }
 }
 
+/**
+ * Exportálja az AhoCorasick osztályt más modulokban való használatra.
+ * @module AhoCorasick
+ */
 module.exports = AhoCorasick;
-
-/*
-// Példa használat:
-const ac = new AhoCorasick();
- 
-ac.addPattern("a");
- 
-ac.addPattern("ag");
-ac.addPattern("c");
-ac.addPattern("caa");
-ac.addPattern("gag");
-ac.addPattern("gc");
-ac.addPattern("gca");
- 
- 
-ac.buildFailureLinks();
- 
-const text = "gcavhgvfkghasdvfugvbsdhkgfvsdakhvbfkuzsvafhgsadvfhgvasdhgfvasdhkgvfiztuwGVFHJGVBFKHGADSIZKFGIESHJBFKJHSADBFKGHJSDAZUTFGVSAJKHBFKHJSADVFUAGSUDZFHGAJSHa";
-const matches = ac.search(text);
- 
-console.log(`Text: ${text}`);
-console.log("Matches:");
-matches.forEach(match => {
-  console.log(`Pattern: ${match.pattern}, Index: ${match.index}`);
-});
-
-//https://www.geeksforgeeks.org/aho-corasick-algorithm-pattern-searching/
-
-//https://www.youtube.com/watch?v=w9-n3jW7q3s
-*/

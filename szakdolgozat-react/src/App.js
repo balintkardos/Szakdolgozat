@@ -11,7 +11,10 @@ const shiftOr = require('./alg/shiftOr');
 const kr = require('./alg/KarpRabin');
 const AhoCorasick = require('./alg/ahoCarasick');
 
-
+/**
+ * Main aplikáció component.
+ * @returns {JSX.Element} - React JSX element.
+ */
 function App() {
   const [selectedAlgorithm, setSelectedAlgorithm] = useState(-1);
   const [description, setDescription] = useState("Ez a naive algoritmus");
@@ -26,6 +29,9 @@ function App() {
   const [timerPre, setTimerPre] = useState(0);
   const [output, setOutput] = useState([]);
 
+   /**
+   * Kezeli a keresés gomb kattintási eseményét.
+   */
   const handleSearchClick = () => {
     if (textInput === '') {
       alert('Szöveg mező nem lehet üres!');
@@ -124,6 +130,10 @@ function App() {
 
   };
 
+  /**
+  * Ahogy változik a kiválasztott algoritmus úgy változtatja a leírást
+  * @useState {selectedAlgorithm} - kiválasztott algoritmus
+  */
   React.useEffect(() => {
     if (selectedAlgorithm === 0) {
       setDescription("Ez a Naive algoritmus");
@@ -146,12 +156,20 @@ function App() {
     }
   }, [selectedAlgorithm]);
 
+  /**
+   * Reseteli az időket és kimeneti találatokat.
+   */
   function reset() {
     setOutput([]);
     setTimerPre(0);
     setTimerSearch(0);
   }
 
+   /**
+   * Felosztja a kimenetet, és ennek megfelelően rendereli a kiemelt szöveget.
+   * @param {Array} out - A kimeneti elemek tömbje.
+   * @returns {JSX.Element} - React JSX element.
+   */
   function splitOutput(out) {
     let dic = {};
     for (let i = 0; i < out.length; i++) {

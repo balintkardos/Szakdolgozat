@@ -1,5 +1,10 @@
-const ALPHABET_SIZE = 0x10FFFF;
-
+/**
+ * Kiszámítja a string két indexe közötti illeszkedő substring hosszát.
+ * @param {string} S - A bemeneti string.
+ * @param {number} idx1 - Az első kezdő indexe a substring-nek.
+ * @param {number} idx2 - A második kezdő indexe a substring-nek.
+ * @returns {number} - A hoszza az illeszkedő substring-nek.
+ */
 function match_length(S, idx1, idx2) {
     if (idx1 === idx2) {
         return S.length - idx1;
@@ -13,6 +18,11 @@ function match_length(S, idx1, idx2) {
     return match_count;
 }
 
+/**
+ * Elvégzi a Boyer-Moore algoritmus alapvető előfeldolgozását.
+ * @param {string} S - A bemeneti string.
+ * @returns {Array.<number>} - Az alapvető előfeldolgozási eredményt reprezentáló tömb.
+ */
 function fundamental_preprocess(S) {
     if (S.length === 0) {
         return [];
@@ -57,54 +67,79 @@ function fundamental_preprocess(S) {
     return z;
 }
 
-function bad_character_table(S) {
-    if (S.length === 0) {
+/**
+ * A Hibás karakterváltási táblázatát állítja elő.
+ * @param {string} pattern - A minta string.
+ * @returns {Array.<Array.<number>>} - hibás karakterváltási táblázat.
+ */
+function bad_character_table(pattern) {
+    const ALPHABET_SIZE = 2047;
+    if (pattern.length === 0) {
         return Array.from({ length: ALPHABET_SIZE }, () => []);
     }
 
-    const R = Array.from({ length: ALPHABET_SIZE }, () => [-1]);
+    const bct = Array.from({ length: ALPHABET_SIZE }, () => [-1]);
     const alpha = Array(ALPHABET_SIZE).fill(-1);
 
-    for (let i = 0; i < S.length; i++) {
-        alpha[(S[i]).codePointAt(0)] = i;
+    for (let i = 0; i < pattern.length; i++) {
+        alpha[(pattern[i]).codePointAt(0)] = i;
 
         for (let j = 0; j < alpha.length; j++) {
-            R[j].push(alpha[j]);
+            bct[j].push(alpha[j]);
         }
     }
 
-    return R;
+    return bct;
 }
 
-function good_suffix_table(S) {
-    const L = Array(S.length).fill(-1);
-    const N = fundamental_preprocess([...S].reverse());
+/**
+ * Létrehozza a good suffix shift táblázatot.
+ * @param {string} pattern - A minta string.
+ * @returns {Array.<number>} - A good suffix shift tábla.
+ */
+function good_suffix_table(pattern) {
+    const gst = Array(pattern.length).fill(-1);
+    const fp = fundamental_preprocess([...pattern].reverse());
 
-    N.reverse();
+    fp.reverse();
 
-    for (let j = 0; j < S.length - 1; j++) {
-        const i = S.length - N[j];
-        if (i !== S.length) {
-            L[i] = j;
+    for (let j = 0; j < pattern.length - 1; j++) {
+        const i = pattern.length - fp[j];
+        if (i !== pattern.length) {
+            gst[i] = j;
         }
     }
 
-    return L;
+    return gst;
 }
 
-function full_shift_table(S) {
-    const F = Array(S.length).fill(0);
-    const Z = fundamental_preprocess(S);
+/**
+ * Generálja a full shift táblát.
+ * @param {string} pattern - A minta string.
+ * @returns {Array.<number>} - A full shift tábla.
+ */
+function full_shift_table(pattern) {
+    const fst = Array(pattern.length).fill(0);
+    const fp = fundamental_preprocess(pattern);
     let longest = 0;
 
-    for (let i = Z.length - 1; i >= 0; i--) {
-        longest = Math.max(Z[i], longest);
-        F[i] = longest;
+    for (let i = fp.length - 1; i >= 0; i--) {
+        longest = Math.max(fp[i], longest);
+        fst[i] = longest;
     }
 
-    return F;
+    return fst;
 }
 
+/**
+ * Boyer-Moore algoritmust al megkeresi a minta találatait a szövegben.
+ * @param {string} P - A minta amit keresünk.
+ * @param {string} T - A szöveg amibe keresünk.
+ * @param {Array.<Array.<number>>} R - A bad character shift tábla.
+ * @param {Array.<number>} L - Good suffix shift tábla.
+ * @param {Array.<number>} F - Full shift tábla.
+ * @returns {Array.<number>} - Tömb amibe a talált helyek vannak.
+ */
 function boyerMoore(P, T, R, L, F) {
     if (P.length === 0 || T.length === 0 || T.length < P.length) {
         return [];
@@ -146,50 +181,10 @@ function boyerMoore(P, T, R, L, F) {
     return matches;
 }
 
-/*
-function approximateMatch(p, t, n) {
-    const segmentLength = Math.round(p.length / (n + 1));
-    const allMatches = new Set();
-  
-    for (let i = 0; i <= n; i++) {
-      const start = i * segmentLength;
-      const end = Math.min((i + 1) * segmentLength, p.length);
-      const segment = p.substring(start, end);
-  
-      const matches = boyerMoore(segment, t);
-      
-      let mismatches = 0;
-      for (const m of matches) {
-        if (m < start || m - start + p.length > t.length) {
-          continue;
-        }
-        mismatches = 0;
-        for (let j = 0; j < start; j++) {
-          if (p[j] !== t[m - start + j]) {
-            mismatches++;
-            if (mismatches > n) {
-              break;
-            }
-          }
-        }
-        for (let j = end; j < p.length; j++) {
-          if (p[j] !== t[m - start + j]) {
-            mismatches++;
-            if (mismatches > n) {
-              break;
-            }
-          }
-        }
-        if (mismatches <= n) {
-          allMatches.add(m - start);
-        }
-      }
-    }
-  
-    return Array.from(allMatches);
-  }
-*/
-
+/**
+ * Exportálja a Boyer-Moore algoritmust és a kapcsolódó táblázatokat más modulokban való használatra.
+ * @module BoyerMoore
+ */
 module.exports = {
     boyerMoore: boyerMoore,
     full_shift_table: full_shift_table,
