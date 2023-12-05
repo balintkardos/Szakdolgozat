@@ -16,18 +16,18 @@ const AhoCorasick = require('./alg/ahoCarasick');
  * @returns {JSX.Element} - React JSX element.
  */
 function App() {
-  const [selectedAlgorithm, setSelectedAlgorithm] = useState(-1);
-  const [description, setDescription] = useState("Ez a naive algoritmus");
-  const [textInput, setTextInput] = useState('');
-  const [patternInput, setPatternInput] = useState('');
-  const [patternInput2, setPatternInput2] = useState('');
-  const [patternInput3, setPatternInput3] = useState('');
-  const [patternInput4, setPatternInput4] = useState('');
-  const [patternInput5, setPatternInput5] = useState('');
-  const [hibaInput, setHibaInput] = useState('');
-  const [timerSearch, setTimerSearch] = useState(0);
-  const [timerPre, setTimerPre] = useState(0);
-  const [output, setOutput] = useState([]);
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState(-1); // Kiválasztott algoritmus.
+  const [description, setDescription] = useState(""); //Leírás szövege.
+  const [textInput, setTextInput] = useState(''); //Szöveg input.
+  const [patternInput, setPatternInput] = useState(''); //Minta input.
+  const [patternInput2, setPatternInput2] = useState(''); //Minta2 input.
+  const [patternInput3, setPatternInput3] = useState(''); //Minta3 input.
+  const [patternInput4, setPatternInput4] = useState(''); //Minta4 input.
+  const [patternInput5, setPatternInput5] = useState(''); //Minta5 input.
+  const [hibaInput, setHibaInput] = useState(''); //Hamming távolság input
+  const [timerSearch, setTimerSearch] = useState(0); //keresés ideje
+  const [timerPre, setTimerPre] = useState(0); //előfeldolgozás ideje
+  const [output, setOutput] = useState([]); //Találatok indexei
 
    /**
    * Kezeli a keresés gomb kattintási eseményét.
