@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import OutputArea from './OutputArea';
 import OutputAreaAC from './OutputAreaAC';
 import HighlightedText from './HighlightedText';
+import Description from './description';
 import './style.css'
 const naiv = require('./alg/naiv');
 const notSoNaive = require('./alg/notSoNaive');
@@ -17,7 +18,6 @@ const AhoCorasick = require('./alg/ahoCarasick');
  */
 function App() {
   const [selectedAlgorithm, setSelectedAlgorithm] = useState(-1); // Kiválasztott algoritmus.
-  const [description, setDescription] = useState(""); //Leírás szövege.
   const [textInput, setTextInput] = useState(''); //Szöveg input.
   const [patternInput, setPatternInput] = useState(''); //Minta input.
   const [patternInput2, setPatternInput2] = useState(''); //Minta2 input.
@@ -131,14 +131,7 @@ function App() {
   };
 
   /**
-  * Ahogy változik a kiválasztott algoritmus úgy változtatja a leírást
-  * @useState {selectedAlgorithm} - kiválasztott algoritmus
-  */
-  React.useEffect(() => {
-    if (selectedAlgorithm === 0) {
-      setDescription("Ez a Naive algoritmus");
-    } else if (selectedAlgorithm === 1) {
-      setDescription("Ez a Not so naive algoritmus");
+      setDescription("A Not So Naive algoritmus.\n 1. Az algoritmus megvizsgálja a keresett mintát, és meghatározza, hogy az első két karakter megegyezik-e.\n 2. Ha az első két karakter megegyezik, akkor az algoritmus a keresett mintát két részre osztja: a kezdő két karakterre és a fennmaradó karakterekre.\n 3. Az algoritmus a szöveget a kezdő két karaktertől kezdve vizsgálja.\n 4. Ha a szöveg következő karaktere megegyezik a keresett minta második karakterével, akkor az algoritmus megvizsgálja, hogy a keresett minta fennmaradó karakterei megegyeznek-e a szöveg következő m-1 karakterével.\n 5. Ha a keresett minta fennmaradó karakterei megegyeznek a szöveg következő m-1 karakterével, akkor az algoritmus megtalált egy egyezést, és visszaadja az egyezés kezdőpozícióját.\n 6. Ha a szöveg következő karaktere nem egyezik meg a keresett minta második karakterével, akkor az algoritmus továbblép a következő karakterre.");
     } else if (selectedAlgorithm === 2) {
       setDescription("Ez a Boyer-Moore algoritmus");
     } else if (selectedAlgorithm === 4) {
@@ -149,13 +142,7 @@ function App() {
       setDescription("Ez a Shift-or algoritmus");
     } else if (selectedAlgorithm === 8) {
       setDescription("Ez a Karp and Rabin algoritmus");
-    } else if (selectedAlgorithm === 10) {
-      setDescription("Ez a Naiv Hibával");
-    } else {
-      setDescription("");
-    }
-  }, [selectedAlgorithm]);
-
+  */
   /**
    * Reseteli az időket és kimeneti találatokat.
    */
@@ -250,7 +237,9 @@ function App() {
           }}>Karp and Rabin</button>
       </div>
       <div className="description">
-        <div>Leírás: {description}</div>
+        <Description
+          number={selectedAlgorithm}
+        />
       </div>
       <div className="inputField">
         <p>Szöveg, amibe keresni szertnél:</p>
@@ -336,7 +325,6 @@ function App() {
       <button className="input-button" onClick={handleSearchClick}>Keresés</button>
       <hr></hr>
       <div>
-
         <h3>Előfeldolgozás ideje: {timerPre} ms</h3>
         <h3>Keresési ideje: {timerSearch} ms</h3>
         <h3>Teljes idő: {timerSearch + timerPre} ms</h3>

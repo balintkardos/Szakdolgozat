@@ -149,3 +149,16 @@ h1 {
   margin: 5px;
   text-align: justify;
 }
+
+.description {
+  font-size: 1em;
+  text-align: justify;
+  margin-top: 1em;
+}
+
+.description p{
+  font-size: 0.9em;
+  text-align: justify;
+  margin: 0.2em;
+}
+
