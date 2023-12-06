@@ -170,7 +170,7 @@ function App() {
   return (
     <div className="App">
       <h1>String matching algoritmusok</h1>
-      {selectedAlgorithm === -1 ? <h3>Válasz algoritmust:</h3> : null}
+      {selectedAlgorithm === -1 ? <h3 className="warning">Válasz algoritmust!</h3> : null}
       <div className="algorithm">
         <button className="algorithm-button"
           style={{ backgroundColor: (selectedAlgorithm === 0) ? "#42b983" : "#555a64" }}
@@ -230,6 +230,7 @@ function App() {
       </div>
       <div className="inputField">
         <p>Szöveg, amibe keresni szertnél:</p>
+        {(selectedAlgorithm > -1 && textInput.length ===0) ? <p className="warning">Szöveg mező nem lehet üres</p> : null}
         <div className="parent-container">
           <textarea
             className="input-text"
@@ -241,6 +242,7 @@ function App() {
           <div className="input-length">{textInput.length}</div>
         </div>
         <p>Minta, amit meg szeretnél találni:</p>
+        {(selectedAlgorithm > -1 && patternInput.length ===0 && textInput.length > 0) ? <p className="warning">Minta mező nem lehet üres</p> : null}
         <div className="parent-container">
           <textarea
             className="input-pattern"
@@ -312,9 +314,9 @@ function App() {
       <button className="input-button" onClick={handleSearchClick}>Keresés</button>
       <hr></hr>
       <div>
-        <h3>Előfeldolgozás ideje: {timerPre} ms</h3>
-        <h3>Keresési ideje: {timerSearch} ms</h3>
-        <h3>Teljes idő: {timerSearch + timerPre} ms</h3>
+        <h3>Előfeldolgozás ideje: {timerPre.toFixed(1)} ms</h3>
+        <h3>Keresési ideje: {timerSearch.toFixed(1)} ms</h3>
+        <h3>Teljes idő: {(timerSearch + timerPre).toFixed(1)} ms</h3>
         <hr></hr>
         {(output.length > 0 && selectedAlgorithm !== 6) ? (
           output.map((element, index) => (

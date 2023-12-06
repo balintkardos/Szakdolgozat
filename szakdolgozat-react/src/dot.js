@@ -9,7 +9,7 @@ import React from 'react';
  */
 const DotComponent = ({ number,long }) => {
   const dots = Array.from({ length: 101 }, (_, index) => (
-    <span key={index} className="dot" style={{ backgroundColor: (index >= number && index <= long) ? '#7289da' : '#424549' }}></span>
+    <span key={index} className="dot" style={{ backgroundColor: (index >= number && index <= long) ? '#5865F2' : '#424549' }}></span>
   ));
   return <div className="dot-container">{dots}</div>;
 };

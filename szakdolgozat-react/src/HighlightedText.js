@@ -21,7 +21,7 @@ const HighlightedText = ({ T, P, indices }) => {
       result.push(
         <React.Fragment key={i}>
           {beforeText}
-          <span style={{ backgroundColor: '#7289da' }}>{highlightedText}</span>
+          <span style={{ backgroundColor: '#5865F2' }}>{highlightedText}</span>
         </React.Fragment>
       );
     }

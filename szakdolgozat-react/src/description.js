@@ -12,10 +12,7 @@ const Description = ({ number }) => {
     }
     if (number === 1) {
         return <div>A Not So Naive algoritmus.
-            <p>Az algoritmus a szöveget a második karaktertől kezdve vizsgálja.</p>
-            <p>Ha a szöveg következő karaktere megegyezik a keresett minta második karakterével, akkor az algoritmus megvizsgálja, hogy a keresett minta fennmaradó karakterei megegyeznek-e a szöveg következő m-1 karakterével.</p>
-            <p>Ha a keresett minta fennmaradó karakterei megegyeznek a szöveg következő m-1 karakterével, akkor az algoritmus megtalált egy egyezést, és visszaadja az egyezés kezdőpozícióját.</p>
-            <p>Ha nem egyezik meg a keresett minta második karakterével, akkor az algoritmus továbblép a következő karakterre.</p>
+            <p>A naiv algoritmus azzal kiegészítve, hogy a mintaillesztést a második karaktertől kezdve kezdi vizsgálni.</p>
         </div>;
     }
     if (number === 2) {
