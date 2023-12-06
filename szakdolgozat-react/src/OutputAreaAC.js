@@ -9,13 +9,13 @@ import DotComponent from './dot'
  */
 function szazalek(e, full) {
   const percentage = (e / full) * 100;
-  return Math.round(percentage * 100) / 100;
+  return  Math.round(Math.round(percentage * 100) / 100);
 }
 
 /**
  * Az Aho-Corasick algoritmus eredményeinek kimeneti területét reprezentáló funkcionális komponens.
  * @param {Object} props - Component properties.
- * @param {string} props.pattern - Minta string.
+ * @param {string} props.pattern - A minta.
  * @param {number} props.index - A mintaegyezés indexe.
  * @param {number} props.long - A szöveg hossza.
  * @returns {JSX.Element} - React JSX element.
@@ -25,7 +25,7 @@ const OutputAreaAC = (props) => {
     <div>
       <h4>Találat "{props.pattern}"</h4>
       <p>helye: {props.index}/{props.long}</p>
-      <DotComponent number={szazalek(props.index, props.long)} />
+      <DotComponent number={szazalek(props.index, props.long)} long={szazalek(props.index+props.pattern.length, props.long)} />
     </div>
   );
 };

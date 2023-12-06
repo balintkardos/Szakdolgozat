@@ -9,7 +9,7 @@ import DotComponent from './dot'
  */
 function szazalek(e, full) {
   const percentage = (e / full) * 100;
-  return Math.round(percentage * 100) / 100;
+  return  Math.round(Math.round(percentage * 100) / 100);
 }
 
 /**
@@ -18,14 +18,15 @@ function szazalek(e, full) {
  * @param {number} props.index - A mintaegyezés indexe.
  * @param {number} props.element - Az elem helyzete.
  * @param {number} props.long - A szöveg hossza.
+ * @param {string} props.pattern - A a minta.
  * @returns {JSX.Element} - React JSX element.
  */
 const OutputArea = (props) => {
   return (
     <div>
       <h4>Találat {props.index}</h4>
-      <p>helye: {props.element}/{props.long}</p>
-      <DotComponent number={szazalek(props.element, props.long)} />
+      <p>kezdőd a {props.element}. indexű karakteren a {props.long}-ból</p>
+      <DotComponent number={szazalek(props.element, props.long)} long={szazalek(props.element+props.pattern.length,props.long)}/>
     </div>
   );
 };
