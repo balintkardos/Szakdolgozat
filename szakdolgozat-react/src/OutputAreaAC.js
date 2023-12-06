@@ -24,7 +24,7 @@ const OutputAreaAC = (props) => {
   return (
     <div>
       <h4>Találat "{props.pattern}"</h4>
-      <p>ami {props.index}. karakteren kezdődik. Összes karkter száma: {props.long}</p>
+      <p>Az {props.index}. karakteren kezdődik. Szöveg hossza: {props.long}</p>
       <DotComponent number={szazalek(props.index, props.long)} long={szazalek(props.index+props.pattern.length, props.long)} />
     </div>
   );

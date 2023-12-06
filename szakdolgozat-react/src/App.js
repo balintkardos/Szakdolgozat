@@ -28,6 +28,7 @@ function App() {
   const [timerSearch, setTimerSearch] = useState(0); //keresés ideje
   const [timerPre, setTimerPre] = useState(0); //előfeldolgozás ideje
   const [output, setOutput] = useState([]); //Találatok indexei
+  const [searchBool,setSearchBool] = useState(false)
 
    /**
    * Kezeli a keresés gomb kattintási eseményét.
@@ -127,7 +128,7 @@ function App() {
       setTimerSearch((endTime - startTime));
 
     }
-
+    setSearchBool(true);
   };
 
   /**
@@ -137,6 +138,7 @@ function App() {
     setOutput([]);
     setTimerPre(0);
     setTimerSearch(0);
+    setSearchBool(false);
   }
 
    /**
@@ -312,12 +314,12 @@ function App() {
         ) : null}
       </div>
       <button className="input-button" onClick={handleSearchClick}>Keresés</button>
-      <hr></hr>
-      <div>
+      {(output.length > 0&&searchBool)?<hr></hr>:null}
+      {searchBool?<div>
         <h3>Előfeldolgozás ideje: {timerPre.toFixed(1)} ms</h3>
         <h3>Keresési ideje: {timerSearch.toFixed(1)} ms</h3>
         <h3>Teljes idő: {(timerSearch + timerPre).toFixed(1)} ms</h3>
-        <hr></hr>
+        {(output.length > 0) ?<hr></hr>:null}
         {(output.length > 0 && selectedAlgorithm !== 6) ? (
           output.map((element, index) => (
             <OutputArea
@@ -333,12 +335,14 @@ function App() {
                 pattern={item.pattern}
                 index={item.index}
                 long={textInput.length} />
-            ))) : (
-          <h3>Nem talált semmit</h3>
-        )}
-      </div>
-      <hr className='hr-egy' />
-      <h2>A szövegben:</h2>
+            ))) : null}
+      </div>:null}
+      {(output.length > 0) ? (
+        <div>
+          <hr className='hr-egy' />
+          <h2>A szövegben:</h2>
+        </div>
+      ) : null}
       {(output.length > 0 && selectedAlgorithm === 6 ? splitOutput(output) : null)}
       {(output.length > 0 && selectedAlgorithm !== 6) ? <HighlightedText T={textInput} P={patternInput} indices={output} /> : null}
     </div>
