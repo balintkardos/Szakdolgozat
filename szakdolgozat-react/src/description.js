@@ -8,7 +8,7 @@ import React from 'react';
  */
 const Description = ({ number }) => {
     if (number === 0) {
-        return <div>A naiv algoritmus <p>Minden lehetséges helyen megpróbálja illeszteni a keresett sztringeket a szövegre</p></div>;
+        return <div>A naiv algoritmus <p>Minden lehetséges helyen megpróbálja illeszteni a keresett stringet a szövegre.</p></div>;
     }
     if (number === 1) {
         return <div>A Not So Naive algoritmus.
@@ -17,7 +17,7 @@ const Description = ({ number }) => {
     }
     if (number === 2) {
         return <div>A Boyer-Moore algoritmus.
-            <p>A hatékony ugrás érdekébe két szabály alapján ugrik előre a szövegben. Szöveget balról jobbra, mintát jobról balra olvassa.</p>
+            <p>A hatékony ugrás érdekébe két szabály alapján ugrik előre a szövegben. Szöveget balról jobbra, mintát jobbról balra olvassa.</p>
             <p>1. Bad character szabály</p>
             <p>2.Good Suffix szabály</p>
         </div>;

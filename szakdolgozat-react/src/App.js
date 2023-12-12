@@ -231,7 +231,7 @@ function App() {
         />
       </div>
       <div className="inputField">
-        <p>Szöveg, amibe keresni szertnél:</p>
+        <p>Szöveg, amibe keresni szeretnél:</p>
         {(selectedAlgorithm > -1 && textInput.length ===0) ? <p className="warning">Szöveg mező nem lehet üres</p> : null}
         <div className="parent-container">
           <textarea
