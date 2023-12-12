@@ -73,7 +73,8 @@ function fundamental_preprocess(S) {
  * @returns {Array.<Array.<number>>} - hibás karakterváltási táblázat.
  */
 function bad_character_table(pattern) {
-    const ALPHABET_SIZE = 2047;
+    //const ALPHABET_SIZE = 0x10FFFF; //minden karakterrejó csak lassú az előfeldolgozás
+    const ALPHABET_SIZE = 2047; //legtöbb esetben elég
     if (pattern.length === 0) {
         return Array.from({ length: ALPHABET_SIZE }, () => []);
     }
